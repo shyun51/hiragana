@@ -110,6 +110,18 @@ button {
   cursor: pointer;
 }
 
+/* 타이틀 옆 웰시코기 이미지 */
+.corgi-title-img {
+  height: 60px;
+  width: auto;
+  background: transparent;
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: none;
+  object-fit: contain;
+  display: inline-block;
+}
+
 @media (max-width: 768px) {
   .row-selection-container {
     grid-template-columns: repeat(3, 1fr);
@@ -199,6 +211,12 @@ button {
     position: static;
     margin: 10px 4px 0 4px;
     transform: none;
+  }
+  .corgi-title-img {
+    height: 40px;
+    min-width: 32px;
+    max-width: 60px;
+    border-radius: 6px;
   }
 }
 

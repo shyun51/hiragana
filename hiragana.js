@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ],
     "は行": [
       { char: "は", answers: ["ha","하"], row: "하행 (は行)" },
-      { char: "ひ", answers: ["hi","히"], row: "하행 (は行)" },
+      { char: "ひ", answers: ["hi","히"], row: "하행 (는行)" },
       { char: "ふ", answers: ["fu","후","hu"], row: "하행 (は行)" },
       { char: "へ", answers: ["he","헤"], row: "하행 (は行)" },
       { char: "ほ", answers: ["ho","호"], row: "하행 (는行)" }
@@ -202,6 +202,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const humorBtn        = document.getElementById("humor-button");
   const currentSel      = document.getElementById("current-selection");
   const comboBestCtr    = document.getElementById("combo-best-counter");
+  const showSelectedRowsBtn = document.getElementById("show-selected-rows");
+  const selectedRowsList = document.getElementById("selected-rows-list");
 
   let currentComboKey = "";
 
@@ -365,4 +367,25 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     return arr;
   }
+
+  showSelectedRowsBtn.addEventListener("click", function() {
+    // 체크된 행 라벨만 모아서 보여주기
+    const checked = document.querySelectorAll('.row-selection-container input[type="checkbox"]:checked');
+    if (checked.length === 0) {
+      selectedRowsList.textContent = "선택된 행이 없습니다.";
+    } else {
+      selectedRowsList.innerHTML = Array.from(checked).map(cb => {
+        const label = document.querySelector('label[for="' + cb.id + '"]');
+        return label ? label.textContent : cb.value;
+      }).join(', ');
+    }
+    // 토글
+    if (selectedRowsList.style.display === "none" || selectedRowsList.style.display === "") {
+      selectedRowsList.style.display = "block";
+      showSelectedRowsBtn.textContent = "닫기";
+    } else {
+      selectedRowsList.style.display = "none";
+      showSelectedRowsBtn.textContent = "현재 선택한 행 보기";
+    }
+  });
 });

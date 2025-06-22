@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     "さ行": [
       { char: "さ", answers: ["sa","사"], row: "사행 (さ行)" },
       { char: "し", answers: ["shi","si","시"], row: "사행 (さ行)" },
-      { char: "す", answers: ["su","수"], row: "사행 (さ行)" },
+      { char: "す", answers: ["su","수","스"], row: "사행 (さ行)" },
       { char: "せ", answers: ["se","세"], row: "사행 (さ行)" },
       { char: "そ", answers: ["so","소"], row: "사행 (さ行)" }
     ],
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { char:"ちいさい",answers:["chiisai","치-사이"],row:"장음" },
       { char:"すうがく",answers:["suugaku","수-가쿠"],row:"장음" },
       { char:"りゅうがく",answers:["ryuugaku","류-가쿠"],row:"장음" },
-      { char:"きょうしつ",answers:["kyoushitsu","쿄-시츠"],row:"장음" },
+      { char:"きょうしつ",answers:["kyoushitsu","쿄-시츠","쿄-시추추"],row:"장음" },
       { char:"じゅうどう",answers:["juudou","주-도-"],row:"장음" },
       { char:"きゅうり",answers:["kyuuri","큐-리"],row:"장음" },
       { char:"びょういん",answers:["byouin","뵤-인","뵤-잉"],row:"장음" },

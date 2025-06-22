@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { char: "は", answers: ["ha","하"], row: "하행 (は行)" },
       { char: "ひ", answers: ["hi","히"], row: "하행 (는行)" },
       { char: "ふ", answers: ["fu","후","hu"], row: "하행 (は行)" },
-      { char: "へ", answers: ["he","헤"], row: "하행 (は行)" },
+      { char: "へ", answers: ["he","헤"], row: "하행 (는行)" },
       { char: "ほ", answers: ["ho","호"], row: "하행 (는行)" }
     ],
     "ま行": [
@@ -204,6 +204,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const comboBestCtr    = document.getElementById("combo-best-counter");
   const showSelectedRowsBtn = document.getElementById("show-selected-rows");
   const selectedRowsList = document.getElementById("selected-rows-list");
+  const toggleRowSelectionBtn = document.getElementById("toggle-row-selection");
+  const rowSelectionAccordion = document.getElementById("row-selection-accordion");
 
   let currentComboKey = "";
 
@@ -386,6 +388,16 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
       selectedRowsList.style.display = "none";
       showSelectedRowsBtn.textContent = "현재 선택한 행 보기";
+    }
+  });
+
+  toggleRowSelectionBtn.addEventListener("click", function() {
+    if (rowSelectionAccordion.style.display === "none" || rowSelectionAccordion.style.display === "") {
+      rowSelectionAccordion.style.display = "block";
+      toggleRowSelectionBtn.textContent = "행 선택 접기";
+    } else {
+      rowSelectionAccordion.style.display = "none";
+      toggleRowSelectionBtn.textContent = "행 선택 펼치기";
     }
   });
 });

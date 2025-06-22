@@ -218,6 +218,12 @@ button {
     max-width: 60px;
     border-radius: 6px;
   }
+  .fixed-quiz-btn {
+    font-size: 17px;
+    padding: 12px 0;
+    border-radius: 10px;
+    max-width: 98vw;
+  }
 }
 
 /* 애니메이션 */
@@ -232,4 +238,29 @@ button {
   50% { transform: translateX(5px); }
   75% { transform: translateX(-5px); }
   100% { transform: translateX(0); }
+}
+
+/* 퀴즈 시작 버튼 고정 스타일 */
+.fixed-quiz-btn {
+  display: block;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 400px;
+  margin: 24px auto 0 auto;
+  z-index: 10;
+  background: #0077cc;
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #bbb;
+  padding: 16px 0;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.fixed-quiz-btn:hover {
+  background: #005fa3;
 }

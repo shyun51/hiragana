@@ -200,18 +200,47 @@ document.addEventListener("DOMContentLoaded", function() {
   const streakCtr       = document.getElementById("streak-counter");
   const bestCtr         = document.getElementById("best-counter");
   const humorBtn        = document.getElementById("humor-button");
+  const currentSel      = document.getElementById("current-selection");
+  const comboBestCtr    = document.getElementById("combo-best-counter");
 
-  // 장음 안내 메시지 추가
-  const answerGuide = document.createElement("div");
-  answerGuide.style.color = "#666";
-  answerGuide.style.fontSize = "0.9em";
-  answerGuide.style.marginTop = "5px";
-  answerGuide.textContent = "※ 장음은 '-'로 입력하세요. (예: おばあさん → obaasan)";
-  answerInput.parentNode.insertBefore(answerGuide, answerInput.nextSibling);
+  let currentComboKey = "";
 
-  function updateCounters() {
+  function getComboKey(rows) {
+    // 조합을 정렬해서 항상 같은 key가 되도록
+    return rows.slice().sort().join(",");
+  }
+
+  function getComboBest(key) {
+    return parseInt(localStorage.getItem("bestStreak_" + key)) || 0;
+  }
+
+  function setComboBest(key, value) {
+    localStorage.setItem("bestStreak_" + key, value);
+  }
+
+  function getAllComboBests() {
+    // localStorage에서 bestStreak_로 시작하는 값 중 최대값 반환
+    let max = 0;
+    for (let k in localStorage) {
+      if (k.startsWith("bestStreak_")) {
+        const v = parseInt(localStorage.getItem(k)) || 0;
+        if (v > max) max = v;
+      }
+    }
+    return max;
+  }
+
+  function updateCounters(selectedRows, comboBest) {
     streakCtr.textContent = `연속 정답: ${streak}`;
-    bestCtr.textContent   = `최고 기록: ${bestStreak}`;
+    bestCtr.textContent   = `전체 최고 기록: ${getAllComboBests()}`;
+    if (selectedRows) {
+      currentSel.textContent = `현재 선택: ${selectedRows.join(", ")}`;
+    }
+    if (comboBest !== undefined) {
+      comboBestCtr.textContent = `이 조합의 최고 기록: ${comboBest}`;
+    } else {
+      comboBestCtr.textContent = "";
+    }
   }
   updateCounters();
 
@@ -244,7 +273,9 @@ document.addEventListener("DOMContentLoaded", function() {
     pendingCharacters = shuffle(selectedCharacters.slice());
     streak = 0;
     incorrectCount = 0;
-    updateCounters();
+    currentComboKey = getComboKey(checked);
+    const comboBest = getComboBest(currentComboKey);
+    updateCounters(checked, comboBest);
     feedback.textContent = "";
     feedback.style.fontSize = "";
     feedback.style.color    = "";
@@ -265,6 +296,9 @@ document.addEventListener("DOMContentLoaded", function() {
     streak = 0;
     incorrectCount = 0;
     updateCounters();
+    currentSel.textContent = "";
+    comboBestCtr.textContent = "";
+    currentComboKey = "";
   });
 
   function nextCharacter() {
@@ -287,17 +321,18 @@ document.addEventListener("DOMContentLoaded", function() {
     if (currentCharacter.answers.includes(ans)) {
       if (isFirstAttempt) streak++;
       else streak = 1;
-      if (streak > bestStreak) {
-        bestStreak = streak;
-        localStorage.setItem("bestStreak", bestStreak);
+      let comboBest = getComboBest(currentComboKey);
+      if (streak > comboBest) {
+        setComboBest(currentComboKey, streak);
+        comboBest = streak;
       }
-      updateCounters();
+      updateCounters(currentComboKey ? currentComboKey.split(",") : undefined, comboBest);
       nextCharacter();
     } else {
       incorrectCount++;
       isFirstAttempt = false;
       streak = 0;
-      updateCounters();
+      updateCounters(currentComboKey ? currentComboKey.split(",") : undefined, getComboBest(currentComboKey));
       let msg = "틀렸습니다" + "!".repeat(incorrectCount);
       if (humorMode) {
         const size = 20 + incorrectCount * 5;

@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", function() {
       { char: "お", answers: ["o","오"], row: "아행 (あ行)" }
     ],
     "か行": [
-      { char: "か", answers: ["ka","카"], row: "가행 (か行)" },
-      { char: "き", answers: ["ki","키"], row: "가행 (か行)" },
-      { char: "く", answers: ["ku","쿠"], row: "가행 (か行)" },
-      { char: "け", answers: ["ke","케"], row: "가행 (か行)" },
-      { char: "こ", answers: ["ko","코"], row: "가행 (か行)" }
+      { char: "か", answers: ["ka","카"], row: "카행 (か行)" },
+      { char: "き", answers: ["ki","키"], row: "카행 (か行)" },
+      { char: "く", answers: ["ku","쿠"], row: "카행 (か行)" },
+      { char: "け", answers: ["ke","케"], row: "카행 (か行)" },
+      { char: "こ", answers: ["ko","코"], row: "카행 (か行)" }
     ],
     "さ行": [
       { char: "さ", answers: ["sa","사"], row: "사행 (さ行)" },

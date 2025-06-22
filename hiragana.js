@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const selectionScreen = document.getElementById("selection-screen");
   const quizScreen      = document.getElementById("quiz-screen");
-  const startBtn        = document.getElementById("start-quiz");
+  const startQuizBtn    = document.getElementById("start-quiz");
   const hiraganaDisp    = document.getElementById("hiragana-display");
   const answerInput     = document.getElementById("answer-input");
   const submitBtn       = document.getElementById("submit-answer");
@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('input[name="rows"]').forEach(cb => cb.checked = false);
   });
 
-  startBtn.addEventListener("click", () => {
+  startQuizBtn.addEventListener("click", () => {
     const checked = Array.from(document.querySelectorAll('input[name="rows"]:checked'))
                          .map(cb => cb.value);
     if (checked.length === 0) {
@@ -286,6 +286,7 @@ document.addEventListener("DOMContentLoaded", function() {
     feedback.style.animation= "";
     selectionScreen.style.display = "none";
     quizScreen.style.display      = "block";
+    startQuizBtn.style.display    = "none";
     answerInput.focus();
     nextCharacter();
   });
@@ -295,6 +296,7 @@ document.addEventListener("DOMContentLoaded", function() {
     selectedCharacters = [];
     quizScreen.style.display      = "none";
     selectionScreen.style.display = "block";
+    startQuizBtn.style.display    = "block";
     feedback.textContent = "";
     answerInput.value    = "";
     streak = 0;

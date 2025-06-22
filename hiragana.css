@@ -131,22 +131,74 @@ button {
 }
 
 @media (max-width: 480px) {
-  .row-selection-container {
-    grid-template-columns: repeat(2, 1fr);
+  body {
+    padding: 8px;
+  }
+  #quiz-screen {
+    max-width: 100vw;
+    padding: 0 4vw;
+  }
+  #streak-counter, #best-counter {
+    position: static;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 4px 6px 4px;
+  }
+  #combo-best-counter, #current-selection {
+    display: block;
+    margin: 4px 0 8px 0;
+    font-size: 13px;
+    color: #666;
+    word-break: break-all;
   }
   #hiragana-display {
-    font-size: 60px;
-    margin: 40px 0 15px 0;
+    font-size: 48px;
+    margin: 30px 0 10px 0;
   }
   #answer-input {
-    width: 200px;
+    width: 70vw;
+    max-width: 220px;
     font-size: 16px;
+    margin-bottom: 10px;
+    margin-right: 8px;
+    border-radius: 8px;
+    border: 2px solid #ffa500;
+    padding: 8px;
   }
-  button,
-  .selection-buttons button,
-  #humor-button {
+  #submit-answer {
     font-size: 16px;
-    padding: 6px 12px;
+    padding: 8px 14px;
+    border-radius: 8px;
+  }
+  .row-selection-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .row-button {
+    padding: 8px 4px;
+    max-width: 120px;
+    font-size: 15px;
+    border-radius: 8px;
+  }
+  .row-button input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+  }
+  .selection-buttons {
+    margin-bottom: 10px;
+  }
+  button, .selection-buttons button, #humor-button {
+    font-size: 15px;
+    padding: 7px 12px;
+    border-radius: 8px;
+  }
+  #home-button, #humor-button {
+    position: static;
+    margin: 10px 4px 0 4px;
+    transform: none;
   }
 }
 

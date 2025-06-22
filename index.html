@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>히라가나 암기 퀴즈</title>
+  <link rel="stylesheet" href="hiragana.css"/>
+</head>
+<body>
+  <!-- 행 선택 화면 -->
+  <div id="selection-screen">
+    <h1>히라가나 행 선택</h1>
+    <p>연습할 히라가나 행을 선택하세요:</p>
+    <form id="row-selection-form">
+      <div class="row-selection-container">
+        <!-- 기본 10개 행 -->
+        <div class="row-button">
+          <input type="checkbox" id="row_a"  name="rows" value="あ行" checked>
+          <label for="row_a">아행 (あ行)</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_ka" name="rows" value="か行" checked>
+          <label for="row_ka">가행 (か行)</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_sa" name="rows" value="さ行" checked>
+          <label for="row_sa">사행 (さ行)</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_ta" name="rows" value="た行" checked>
+          <label for="row_ta">타행 (た行)</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_na" name="rows" value="な行" checked>
+          <label for="row_na">나행 (な行)</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_ha" name="rows" value="は行" checked>
+          <label for="row_ha">하행 (は行)</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_ma" name="rows" value="ま行" checked>
+          <label for="row_ma">마행 (ま行)</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_ya" name="rows" value="や行" checked>
+          <label for="row_ya">야행 (や行)</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_ra" name="rows" value="ら行" checked>
+          <label for="row_ra">라행 (ら行)</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_wa" name="rows" value="わ行" checked>
+          <label for="row_wa">와행 (わ行)</label>
+        </div>
+        <!-- 특수음 -->
+        <div class="row-button">
+          <input type="checkbox" id="row_dakuten"   name="rows" value="탁음">
+          <label for="row_dakuten">탁음</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_handakuten" name="rows" value="반탁음">
+          <label for="row_handakuten">반탁음</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_youon"     name="rows" value="요음">
+          <label for="row_youon">요음</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_sokuon"    name="rows" value="촉음">
+          <label for="row_sokuon">촉음</label>
+        </div>
+        <div class="row-button">
+          <input type="checkbox" id="row_choon"     name="rows" value="장음">
+          <label for="row_choon">장음</label>
+        </div>
+      </div>
+      <div class="selection-buttons">
+        <button type="button" id="select-all">모두 선택</button>
+        <button type="button" id="deselect-all">모두 취소</button>
+      </div>
+      <button type="button" id="start-quiz">퀴즈 시작</button>
+    </form>
+  </div>
+
+  <!-- 퀴즈 화면 -->
+  <div id="quiz-screen" style="display: none;">
+    <span id="streak-counter">연속 정답: 0</span>
+    <span id="best-counter">최고 기록: 0</span>
+
+    <div id="hiragana-display"></div>
+    <input type="text" id="answer-input" placeholder="답을 입력하세요...">
+    <button id="submit-answer">확인</button>
+    <div id="feedback"></div>
+
+    <button id="home-button">HOME</button>
+    <button id="humor-button">유머모드 Off</button>
+  </div>
+
+  <script src="hiragana.js"></script>
+</body>
+</html>

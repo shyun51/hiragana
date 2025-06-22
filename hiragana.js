@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { char:"ぴょ",answers:["pyo","표"],row:"요음" }
     ],
     "촉음": [
-      { char:"かった",answers:["katta","캇타"],row:"촉음" },
+      { char:"かった",answers:["katta","캇타","칻타"],row:"촉음" },
       { char:"きって",answers:["kitte","킫테"],row:"촉음" },
       { char:"さっか",answers:["sakka","삭카"],row:"촉음" },
       { char:"にっぽん",answers:["nippon","닙폰"],row:"촉음" },

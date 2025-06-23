@@ -174,7 +174,10 @@ document.addEventListener("DOMContentLoaded", function() {
       { char:"きゅうり",answers:["kyuuri","큐-리"],row:"장음" },
       { char:"びょういん",answers:["byouin","뵤-인","뵤-잉"],row:"장음" },
       { char:"りょうり",answers:["ryouri","료-리"],row:"장음" },
-      { char:"しょうがっこう",answers:["shougakkou","쇼-각코-"],row:"장음" }
+      { char:"しょうがっこう",answers:["shougakkou","쇼-각코-"],row:"장음" },
+      { char:"とらがひとをかもうとするときのうなりごえ",answers:["토라가히토-카모-토스루토키노우나리고에","토라가히토-카모-토스루토키노-나리고에"],row:"장음" },
+      { char:"りゅうぐうのおとひめのもとゆいのはずし",answers:["류-구-노오토히메노모토유이노하즈시","류-구-노-토히메노모토유이노하즈시"],row:"장음" }
+
     ]
   };
 

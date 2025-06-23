@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { char:"ざっし",answers:["zasshi","잣시"],row:"촉음" },
       { char:"けっこん",answers:["kekkon","켑콘"],row:"촉음" },
       { char:"しっぱい",answers:["shippai","십파이"],row:"촉음" },
-      { char:"じっけん",answers:["jikken","짇켄"],row:"촉음" },
+      { char:"じっけん",answers:["jikken","직켄","직켕"],row:"촉음" },
       { char:"ちっとも",answers:["chittomo","칟토모"],row:"촉음" },
       { char:"にっき",answers:["nikki","닉키"],row:"촉음" },
       { char:"はっぱ",answers:["happa","합파"],row:"촉음" },

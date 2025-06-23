@@ -1,3 +1,5 @@
+@import url('katakana.css');
+
 body {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -52,7 +54,6 @@ body {
   max-width: 600px;
   position: relative;
 }
-
 #streak-counter {
   position: fixed;
   top: 20px;
@@ -67,19 +68,37 @@ body {
   font-size: 20px;
   font-weight: bold;
 }
-
-#hiragana-display {
+#combo-best-counter, #current-selection {
+  display: block;
+  margin: 4px 0 8px 0;
+  font-size: 13px;
+  color: #666;
+  word-break: break-all;
+}
+#katakana-display {
   font-size: 100px;
   margin: 80px 0 30px 0;
 }
-
 #answer-input {
   font-size: 20px;
   padding: 10px;
   width: 300px;
   margin-bottom: 20px;
 }
-
+#submit-answer {
+  font-size: 20px;
+  padding: 8px 24px;
+  border-radius: 8px;
+  border: 2px solid #aaa;
+  background: #fff;
+  font-weight: bold;
+  margin-left: 12px;
+  transition: background 0.2s, color 0.2s;
+}
+#submit-answer:hover {
+  background: #e0e0ff;
+  color: #222;
+}
 #feedback {
   color: red;
   font-weight: bold;
@@ -87,13 +106,6 @@ body {
   max-width: 90vw;
   word-break: break-word;
   white-space: normal;
-}
-
-button {
-  font-size: 20px;
-  padding: 10px 20px;
-  margin-top: 20px;
-  cursor: pointer;
 }
 #home-button {
   position: fixed;
@@ -109,8 +121,6 @@ button {
   padding: 8px 16px;
   cursor: pointer;
 }
-
-/* 타이틀 옆 웰시코기 이미지 */
 .corgi-title-img {
   height: 60px;
   width: auto;
@@ -126,7 +136,7 @@ button {
   .row-selection-container {
     grid-template-columns: repeat(3, 1fr);
   }
-  #hiragana-display {
+  #katakana-display {
     font-size: 80px;
     margin: 60px 0 20px 0;
   }
@@ -141,7 +151,6 @@ button {
     padding: 8px 16px;
   }
 }
-
 @media (max-width: 480px) {
   body {
     padding: 8px;
@@ -163,7 +172,7 @@ button {
     color: #666;
     word-break: break-all;
   }
-  #hiragana-display {
+  #katakana-display {
     font-size: 48px;
     margin: 30px 0 10px 0;
   }

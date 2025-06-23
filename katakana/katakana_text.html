@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>가타카나 암기 퀴즈</title>
+  <link rel="stylesheet" href="css/katakana_text.css"/>
+</head>
+<body>
+  <!-- 행 선택 화면 -->
+  <div id="selection-screen">
+    <div style="display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap;">
+      <h1 style="margin-bottom:0;">가타카나 행 선택</h1>
+      <img src="../welshcorgi.png" alt="웰시코기" class="corgi-title-img"/>
+    </div>
+    <p>연습할 가타카나 행을 선택하세요:</p>
+    <button type="button" id="show-selected-rows" style="margin-bottom:10px;">현재 선택한 행 보기</button>
+    <button type="button" id="toggle-row-selection" style="margin-bottom:10px;">행 선택 접기</button>
+    <div id="row-selection-accordion">
+      <form id="row-selection-form">
+        <div class="row-selection-container">
+          <div class="row-button">
+            <input type="checkbox" id="row_a"  name="rows" value="ア行" checked>
+            <label for="row_a">아행 (ア行)</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_ka" name="rows" value="カ行" checked>
+            <label for="row_ka">카행 (カ行)</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_sa" name="rows" value="サ行" checked>
+            <label for="row_sa">사행 (サ行)</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_ta" name="rows" value="タ行" checked>
+            <label for="row_ta">타행 (タ行)</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_na" name="rows" value="ナ行" checked>
+            <label for="row_na">나행 (ナ行)</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_ha" name="rows" value="ハ行" checked>
+            <label for="row_ha">하행 (ハ行)</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_ma" name="rows" value="マ行" checked>
+            <label for="row_ma">마행 (マ行)</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_ya" name="rows" value="ヤ行" checked>
+            <label for="row_ya">야행 (ヤ行)</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_ra" name="rows" value="ラ行" checked>
+            <label for="row_ra">라행 (ラ行)</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_wa" name="rows" value="ワ行" checked>
+            <label for="row_wa">와행 (ワ行)</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_dakuten"   name="rows" value="탁음">
+            <label for="row_dakuten">탁음</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_handakuten" name="rows" value="반탁음">
+            <label for="row_handakuten">반탁음</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_youon"     name="rows" value="요음">
+            <label for="row_youon">요음</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_sokuon"    name="rows" value="촉음">
+            <label for="row_sokuon">촉음</label>
+          </div>
+          <div class="row-button">
+            <input type="checkbox" id="row_choon"     name="rows" value="장음">
+            <label for="row_choon">장음</label>
+          </div>
+        </div>
+        <div class="selection-buttons">
+          <button type="button" id="select-all">모두 선택</button>
+          <button type="button" id="deselect-all">모두 취소</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button type="button" id="start-quiz" class="fixed-quiz-btn">퀴즈 시작</button>
+
+  <!-- 퀴즈 화면 -->
+  <div id="quiz-screen" style="display: none;">
+    <span id="streak-counter">연속 정답: 0</span>
+    <span id="best-counter">전체 최고 기록: 0</span>
+    <span id="combo-best-counter" style="color:#0077cc;"></span>
+    <span id="current-selection" style="margin-left:10px; color:#555;"></span>
+
+    <div id="katakana-display"></div>
+    <input type="text" id="answer-input" placeholder="답을 입력하세요...">
+    <button id="submit-answer">확인</button>
+    <div style="font-size:13px; color:#888; margin-top:4px; margin-bottom:8px;">장음은 - ( 마이너스 ) 로 표시</div>
+    <div id="feedback"></div>
+
+    <button id="home-button">HOME</button>
+    <button id="humor-button">유머모드 Off</button>
+  </div>
+
+  <div class="nav-btns" style="margin-top:40px; display:flex; gap:24px; justify-content:center;">
+    <a href="katakana.html">← 이전으로</a>
+    <a href="../index.html">처음으로</a>
+  </div>
+
+  <script src="js/katakana_text.js"></script>
+</body>
+</html>

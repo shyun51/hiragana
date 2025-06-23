@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { char:"すうがく",answers:["suugaku","수-가쿠"],row:"장음" },
       { char:"りゅうがく",answers:["ryuugaku","류-가쿠"],row:"장음" },
       { char:"きょうしつ",answers:["kyoushitsu","쿄-시츠","쿄-시추추"],row:"장음" },
-      { char:"じゅうどう",answers:["juudou","주-도-"],row:"장음" },
+      { char:"じゅうどう",answers:["juudou","주-도-","쥬-도-"],row:"장음" },
       { char:"きゅうり",answers:["kyuuri","큐-리"],row:"장음" },
       { char:"びょういん",answers:["byouin","뵤-인","뵤-잉"],row:"장음" },
       { char:"りょうり",answers:["ryouri","료-리"],row:"장음" },

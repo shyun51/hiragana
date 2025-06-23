@@ -169,13 +169,13 @@ document.addEventListener("DOMContentLoaded", function() {
       { char:"ちいさい",answers:["chiisai","치-사이"],row:"장음" },
       { char:"すうがく",answers:["suugaku","수-가쿠"],row:"장음" },
       { char:"りゅうがく",answers:["ryuugaku","류-가쿠"],row:"장음" },
-      { char:"きょうしつ",answers:["kyoushitsu","쿄-시츠","쿄-시추추"],row:"장음" },
+      { char:"きょうしつ",answers:["kyoushitsu","쿄-시츠","쿄-시추"],row:"장음" },
       { char:"じゅうどう",answers:["juudou","주-도-","쥬-도-"],row:"장음" },
       { char:"きゅうり",answers:["kyuuri","큐-리"],row:"장음" },
       { char:"びょういん",answers:["byouin","뵤-인","뵤-잉"],row:"장음" },
       { char:"りょうり",answers:["ryouri","료-리"],row:"장음" },
       { char:"しょうがっこう",answers:["shougakkou","쇼-각코-"],row:"장음" },
-      { char:"とらがひとをかもうとするときのうなりごえ",answers:["토라가히토-카모-토스루토키노우나리고에","토라가히토-카모-토스루토키노-나리고에"],row:"장음" },
+      { char:"とらがひとをかもうとするときのうなりごえ",answers:["토라가히토오카모-토스루토키노우나리고에","토라가히토오카모-토스루토키노-나리고에"],row:"장음" },
       { char:"りゅうぐうのおとひめのもとゆいのはずし",answers:["류-구-노오토히메노모토유이노하즈시","류-구-노-토히메노모토유이노하즈시"],row:"장음" }
 
     ]

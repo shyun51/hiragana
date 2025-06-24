@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function() {
         { char:"えいご",answers:["eigo","에-고"],row:"장음" },
         { char:"おおきい",answers:["ookii","오-키-"],row:"장음" },
         { char:"ちいさい",answers:["chiisai","치-사이"],row:"장음" },
-        { char:"すうがく",answers:["suugaku","수-가쿠"],row:"장음" },
+        { char:"すうがく",answers:["suugaku","수-가쿠","스-가쿠"],row:"장음" },
         { char:"りゅうがく",answers:["ryuugaku","류-가쿠"],row:"장음" },
         { char:"きょうしつ",answers:["kyoushitsu","쿄-시츠","쿄-시추"],row:"장음" },
         { char:"じゅうどう",answers:["juudou","주-도-","쥬-도-"],row:"장음" },

@@ -1,1 +1,193 @@
 @import url('katakana.css');
+
+/* 카타카나 단어 학습 페이지 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+#quiz-area {
+  margin: 20px auto;
+  max-width: 600px;
+  position: relative;
+}
+
+#katakana-word {
+  font-size: 80px;
+  margin: 60px 0 30px 0;
+  font-weight: bold;
+  color: #333;
+}
+
+#word-answer-input {
+  font-size: 20px;
+  padding: 12px;
+  width: 300px;
+  margin-bottom: 20px;
+  border: 2px solid #aaa;
+  border-radius: 8px;
+  text-align: center;
+}
+
+#word-submit-answer {
+  font-size: 20px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 2px solid #aaa;
+  background: #fff;
+  font-weight: bold;
+  margin-left: 12px;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+#word-submit-answer:hover {
+  background: #e0e0ff;
+  color: #222;
+}
+
+#word-feedback {
+  color: #333;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 18px;
+  min-height: 30px;
+}
+
+#word-progress {
+  font-size: 16px;
+  color: #666;
+  margin-top: 10px;
+}
+
+#word-restart-btn {
+  font-size: 18px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 2px solid #aaa;
+  background: #fff;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  display: none;
+}
+
+#word-restart-btn:hover {
+  background: #e0e0ff;
+  color: #222;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  
+  #quiz-area {
+    max-width: 500px;
+  }
+  
+  #katakana-word {
+    font-size: 60px;
+    margin: 40px 0 20px 0;
+  }
+  
+  #word-answer-input {
+    width: 250px;
+    font-size: 18px;
+    padding: 10px;
+  }
+  
+  #word-submit-answer {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+  
+  #word-feedback {
+    font-size: 16px;
+  }
+  
+  #word-restart-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  
+  #quiz-area {
+    max-width: 100vw;
+    padding: 0 10px;
+  }
+  
+  #katakana-word {
+    font-size: 48px;
+    margin: 30px 0 15px 0;
+  }
+  
+  #word-answer-input {
+    width: 80vw;
+    max-width: 250px;
+    font-size: 16px;
+    padding: 8px;
+    margin-bottom: 15px;
+  }
+  
+  #word-submit-answer {
+    font-size: 16px;
+    padding: 8px 16px;
+    margin-left: 8px;
+  }
+  
+  #word-feedback {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+  
+  #word-progress {
+    font-size: 14px;
+  }
+  
+  #word-restart-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 320px) {
+  #katakana-word {
+    font-size: 40px;
+    margin: 20px 0 10px 0;
+  }
+  
+  #word-answer-input {
+    width: 85vw;
+    font-size: 14px;
+    padding: 6px;
+  }
+  
+  #word-submit-answer {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+  
+  #word-feedback {
+    font-size: 12px;
+  }
+  
+  #word-progress {
+    font-size: 12px;
+  }
+  
+  #word-restart-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}

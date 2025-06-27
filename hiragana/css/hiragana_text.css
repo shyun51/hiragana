@@ -16,11 +16,19 @@ body {
 .row-selection-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 16px 20px;
   margin-top: 32px;
   margin-bottom: 32px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: stretch;
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+}
+
+.row-selection-container + .row-selection-container {
+  margin-top: 0;
+  margin-bottom: 32px;
 }
 
 .row-button {
@@ -31,18 +39,23 @@ body {
   min-height: 48px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   background-color: #f0f0f0;
   margin: 0;
   box-sizing: border-box;
-  flex: 1 1 160px;
+  flex: 0 1 180px;
   max-width: 220px;
+  font-size: 1.08rem;
+  font-weight: 500;
+  transition: background 0.2s, border 0.2s;
 }
+
 .row-button input[type="checkbox"] {
   margin-right: 8px;
   width: 20px;
   height: 20px;
 }
+
 .row-button input[type="checkbox"]:checked + label {
   background-color: #a0d8f1;
   padding: 3px 5px;
@@ -142,29 +155,32 @@ body {
   display: inline-block;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .row-selection-container {
-    gap: 10px;
+    max-width: 98vw;
+    gap: 12px 8px;
+    justify-content: center;
   }
   .row-button {
-    min-width: 100px;
+    flex: 1 1 40vw;
+    min-width: 90px;
     max-width: 48vw;
     font-size: 15px;
     padding: 10px 8px;
   }
-  #hiragana-display {
-    font-size: 80px;
-    margin: 60px 0 20px 0;
+}
+@media (max-width: 600px) {
+  .row-selection-container {
+    gap: 8px 4px;
+    justify-content: center;
   }
-  #answer-input {
-    width: 250px;
-    font-size: 18px;
-  }
-  button,
-  .selection-buttons button,
-  #humor-button {
-    font-size: 18px;
-    padding: 8px 16px;
+  .row-button {
+    flex: 1 1 44vw;
+    min-width: 80px;
+    max-width: 98vw;
+    font-size: 14px;
+    padding: 8px 4px;
+    margin: 0;
   }
 }
 @media (max-width: 480px) {
@@ -208,15 +224,17 @@ body {
     border-radius: 8px;
   }
   .row-selection-container {
-    gap: 6px;
+    gap: 6px 2vw;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 18px;
   }
   .row-button {
-    min-width: 80px;
+    flex: 1 1 90vw;
+    min-width: 70px;
     max-width: 98vw;
-    font-size: 14px;
-    padding: 8px 4px;
+    font-size: 13.5px;
+    padding: 8px 2vw;
     margin: 0;
   }
   .row-button input[type="checkbox"] {

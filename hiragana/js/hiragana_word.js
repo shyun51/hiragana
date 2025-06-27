@@ -230,16 +230,18 @@ function checkWordAnswer() {
     isCorrect = input === answer;
   }
   if (isCorrect) {
-    feedback.textContent = '정답!';
-    feedback.style.color = '#2a8';
+    feedback.textContent = '✔️ 정답!';
+    feedback.classList.add('correct');
+    feedback.classList.remove('wrong');
     correctCount++;
     setTimeout(() => {
       currentIdx++;
       showWordQuestion();
     }, 700);
   } else {
-    feedback.textContent = `오답! 정답: ${Array.isArray(answer) ? answer.join(', ') : answer}`;
-    feedback.style.color = '#e55';
+    feedback.textContent = `❌ 오답! 정답: ${Array.isArray(answer) ? answer.join(', ') : answer}`;
+    feedback.classList.add('wrong');
+    feedback.classList.remove('correct');
     wrongCount++;
     setTimeout(() => {
       currentIdx++;

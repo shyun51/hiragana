@@ -1,7 +1,9 @@
 @import url('hiragana.css');
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Noto Sans KR', Arial, sans-serif;
+  background: #f8fafd;
+  color: #222;
   text-align: center;
   margin: 0;
   padding: 20px;
@@ -284,4 +286,65 @@ body {
 /* selection-screen 하단 패딩 확보 (버튼 가림 방지) */
 #selection-screen {
   padding-bottom: 70px;
+}
+
+input[type="text"], button {
+  font-family: inherit;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+#word-answer-input:focus {
+  border: 2px solid #4a90e2;
+  outline: none;
+  background: #f0f8ff;
+}
+
+#word-submit-answer, #word-restart-btn {
+  min-width: 100px;
+  min-height: 48px;
+  font-size: 1.2rem;
+  margin: 8px 0;
+}
+
+#word-submit-answer:active, #word-restart-btn:active {
+  background: #d0eaff;
+}
+
+#word-feedback {
+  margin-top: 24px;
+  font-size: 1.3rem;
+  min-height: 36px;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+#word-feedback.correct {
+  color: #2a8;
+}
+#word-feedback.wrong {
+  color: #e55;
+}
+
+@media (max-width: 480px) {
+  #quiz-area {
+    padding: 0 2vw;
+  }
+  #hiragana-word {
+    font-size: 2.2rem;
+  }
+  #word-answer-input, #word-submit-answer {
+    width: 90vw;
+    max-width: 320px;
+    font-size: 1.1rem;
+    padding: 14px 10px;
+  }
+  #word-submit-answer, #word-restart-btn {
+    min-height: 44px;
+    font-size: 1.1rem;
+  }
+  .nav-btns {
+    flex-direction: column;
+    gap: 12px;
+  }
 }

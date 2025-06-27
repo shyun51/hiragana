@@ -1,3 +1,5 @@
+import { shuffle } from './common.js';
+
 // 히라가나 단어와 한글 정답 예시 데이터
 const wordList = [
   { hira: "さくら", answer: ["벚꽃"] },
@@ -181,13 +183,6 @@ let currentIdx = 0;
 let correctCount = 0;
 let wrongCount = 0;
 
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
 function startWordGame() {
   wordOrder = Array.from({length: wordList.length}, (_, i) => i);
   shuffle(wordOrder);
@@ -259,4 +254,4 @@ document.getElementById('word-answer-input').addEventListener('keydown', functio
 });
 document.getElementById('word-restart-btn').onclick = startWordGame;
 
-window.onload = startWordGame;
+document.addEventListener('DOMContentLoaded', startWordGame);

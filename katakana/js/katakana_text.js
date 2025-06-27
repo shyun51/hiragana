@@ -1,3 +1,5 @@
+import { shuffle } from './common.js';
+
 // 가타카나 문자 배열 (기본 46자)
 const katakanaList = [
   'ア', 'イ', 'ウ', 'エ', 'オ',
@@ -30,13 +32,6 @@ const romajiList = [
 let currentIndex = 0;
 let correctCount = 0;
 let wrongCount = 0;
-
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
 
 function startGame() {
   currentIndex = 0;
@@ -91,7 +86,7 @@ function checkAnswer() {
   }
 }
 
-window.onload = startGame;
+document.addEventListener('DOMContentLoaded', startGame);
 
 document.addEventListener("DOMContentLoaded", function() {
     const katakanaData = {
@@ -451,14 +446,6 @@ document.addEventListener("DOMContentLoaded", function() {
     answerInput.addEventListener("keyup", e => {
       if (e.key === "Enter") checkAnswer();
     });
-
-    function shuffle(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
 
     showSelectedRowsBtn.addEventListener("click", function() {
       const checked = document.querySelectorAll('.row-selection-container input[type="checkbox"]:checked');

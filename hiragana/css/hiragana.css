@@ -1,3 +1,5 @@
+@import url('common.css');
+
 body {
   display: flex;
   flex-direction: column;
@@ -14,29 +16,6 @@ h1 {
   font-weight: bold;
   letter-spacing: 2px;
 }
-.select-btns, .nav-btns {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-.select-btns a, .nav-btns a {
-  text-decoration: none;
-  padding: 20px 40px;
-  font-size: 1.2rem;
-  border-radius: 12px;
-  background: #fff;
-  color: #333;
-  border: 2px solid #aaa;
-  transition: background 0.2s, color 0.2s, border 0.2s;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-.select-btns a:hover, .nav-btns a:hover {
-  background: #e0e0ff;
-  color: #222;
-  border-color: #888;
-}
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
@@ -45,18 +24,6 @@ h1 {
     margin-bottom: 30px;
     font-size: 1.8rem;
     letter-spacing: 1px;
-  }
-  
-  .select-btns, .nav-btns {
-    gap: 20px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-  }
-  
-  .select-btns a, .nav-btns a {
-    padding: 15px 25px;
-    font-size: 1rem;
-    border-radius: 10px;
   }
 }
 
@@ -67,21 +34,6 @@ h1 {
     font-size: 1.5rem;
     letter-spacing: 0.5px;
   }
-  
-  .select-btns, .nav-btns {
-    gap: 15px;
-    margin-bottom: 10px;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .select-btns a, .nav-btns a {
-    padding: 12px 20px;
-    font-size: 0.9rem;
-    border-radius: 8px;
-    width: 200px;
-    text-align: center;
-  }
 }
 
 @media (max-width: 320px) {
@@ -89,11 +41,5 @@ h1 {
     font-size: 1.3rem;
     margin-top: 20px;
     margin-bottom: 15px;
-  }
-  
-  .select-btns a, .nav-btns a {
-    width: 180px;
-    padding: 10px 15px;
-    font-size: 0.85rem;
   }
 }

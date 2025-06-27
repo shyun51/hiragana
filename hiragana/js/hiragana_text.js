@@ -1,3 +1,5 @@
+import { shuffle } from './common.js';
+
 document.addEventListener("DOMContentLoaded", function() {
     const hiraganaData = {
       /* 기본 10개 행 */
@@ -366,14 +368,6 @@ document.addEventListener("DOMContentLoaded", function() {
     answerInput.addEventListener("keyup", e => {
       if (e.key === "Enter") checkAnswer();
     });
-  
-    function shuffle(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
   
     showSelectedRowsBtn.addEventListener("click", function() {
       // 체크된 행 라벨만 모아서 보여주기

@@ -7,28 +7,36 @@ body {
   text-align: center;
   margin: 0;
   padding: 20px;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* 행 선택 그리드 (5열) */
 .row-selection-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  margin-top: 60px;
-  gap: 15px;
-  margin-bottom: 60px;
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .row-button {
   border: 3px solid #333;
-  border-radius: 10px;
-  padding: 15px;
-  width: 100%;
-  max-width: 170px;
+  border-radius: 14px;
+  padding: 12px 18px;
+  min-width: 120px;
+  min-height: 48px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background-color: #f0f0f0;
+  margin: 0;
+  box-sizing: border-box;
+  flex: 1 1 160px;
+  max-width: 220px;
 }
 .row-button input[type="checkbox"] {
   margin-right: 8px;
@@ -136,7 +144,13 @@ body {
 
 @media (max-width: 768px) {
   .row-selection-container {
-    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .row-button {
+    min-width: 100px;
+    max-width: 48vw;
+    font-size: 15px;
+    padding: 10px 8px;
   }
   #hiragana-display {
     font-size: 80px;
@@ -194,16 +208,16 @@ body {
     border-radius: 8px;
   }
   .row-selection-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   .row-button {
+    min-width: 80px;
+    max-width: 98vw;
+    font-size: 14px;
     padding: 8px 4px;
-    max-width: 120px;
-    font-size: 15px;
-    border-radius: 8px;
+    margin: 0;
   }
   .row-button input[type="checkbox"] {
     width: 18px;
@@ -293,6 +307,8 @@ input[type="text"], button {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 #word-answer-input:focus {
@@ -346,5 +362,65 @@ input[type="text"], button {
   .nav-btns {
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+html, body {
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+#word-game-screen {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#quiz-area {
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  overflow: hidden;
+}
+
+.nav-btns {
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  html, body {
+    height: 100vh;
+    overflow: hidden;
+  }
+  #word-game-screen {
+    min-height: 100vh;
+    height: 100vh;
+    padding: 0;
+  }
+  #quiz-area {
+    max-width: 98vw;
+    padding: 0 2vw;
+  }
+  .nav-btns {
+    max-width: 98vw;
+    padding: 0 2vw;
+  }
+  #word-answer-input, #word-submit-answer {
+    width: 100%;
+    max-width: 98vw;
+    box-sizing: border-box;
   }
 }

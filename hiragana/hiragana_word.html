@@ -4,25 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>히라가나 단어 게임</title>
-  <link rel="stylesheet" href="css/hiragana_text.css"/>
+  <link rel="stylesheet" href="css/hiragana_word.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="word-game-screen">
-    <div style="display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap;">
-      <h1 style="margin-bottom:0;">히라가나 단어 맞추기</h1>
+    <div class="title-container">
+      <h1>히라가나 단어 맞추기</h1>
       <img src="../welshcorgi.png" alt="웰시코기" class="corgi-title-img"/>
     </div>
     <p>나오는 히라가나 단어를 <b>한글</b>로 입력하세요!</p>
-    <div id="quiz-area" style="margin:40px 0 20px 0;">
-      <div id="hiragana-word" style="font-size:2.5rem; margin-bottom:24px;"></div>
-      <input type="text" id="word-answer-input" placeholder="한글로 답을 입력하세요..." style="font-size:1.3rem; padding:8px 16px; width:260px; border-radius:8px; border:2px solid #aaa; text-align:center;" />
-      <button id="word-submit-answer" style="font-size:1.1rem; margin-left:12px;">확인</button>
-      <div id="word-feedback" style="margin-top:20px; min-height:32px; font-size:1.2rem; font-weight:bold;"></div>
-      <div id="word-progress" style="margin-top:16px; color:#888;"></div>
+    <div id="quiz-area">
+      <div id="hiragana-word"></div>
+      <input type="text" id="word-answer-input" placeholder="한글로 답을 입력하세요..." />
+      <button id="word-submit-answer">확인</button>
+      <div id="word-feedback"></div>
+      <div id="word-progress"></div>
     </div>
-    <button id="word-restart-btn" style="display:none; margin-top:24px;">다시하기</button>
-    <div class="nav-btns" style="margin-top:40px; display:flex; gap:24px; justify-content:center;">
+    <button id="word-restart-btn">다시하기</button>
+    <div class="nav-btns">
       <a href="hiragana.html">← 이전으로</a>
       <a href="../index.html">처음으로</a>
     </div>

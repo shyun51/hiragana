@@ -12,6 +12,29 @@ body {
   box-sizing: border-box;
 }
 
+/* 행 선택 화면에서만 스크롤 허용 */
+#selection-screen {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 70px;
+  box-sizing: border-box;
+}
+
+/* 퀴즈 화면은 스크롤 없이 한 화면에 담기 */
+#quiz-screen {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  max-width: none;
+  position: relative;
+}
+
 /* 행 선택 그리드 (5열) */
 .row-selection-container {
   display: flex;
@@ -72,11 +95,6 @@ body {
   cursor: pointer;
 }
 
-#quiz-screen {
-  margin: 20px auto;
-  max-width: 600px;
-  position: relative;
-}
 #streak-counter {
   position: fixed;
   top: 20px;
@@ -99,18 +117,18 @@ body {
   word-break: break-all;
 }
 #hiragana-display {
-  font-size: 100px;
-  margin: 80px 0 30px 0;
+  font-size: 80px;
+  margin: 40px 0 20px 0;
 }
 #answer-input {
-  font-size: 20px;
-  padding: 10px;
-  width: 300px;
-  margin-bottom: 20px;
+  font-size: 18px;
+  padding: 12px;
+  width: 280px;
+  margin-bottom: 16px;
 }
 #submit-answer {
-  font-size: 20px;
-  padding: 8px 24px;
+  font-size: 18px;
+  padding: 10px 20px;
   border-radius: 8px;
   border: 2px solid #aaa;
   background: #fff;
@@ -187,16 +205,24 @@ body {
   body {
     padding: 8px;
   }
-  #quiz-screen {
-    max-width: 100vw;
-    padding: 0 4vw;
+  
+  #selection-screen {
+    padding: 8px;
+    padding-bottom: 70px;
   }
+  
+  #quiz-screen {
+    padding: 8px;
+    justify-content: space-between;
+  }
+  
   #streak-counter, #best-counter {
     position: static;
     display: inline-block;
     font-size: 16px;
     margin: 0 4px 6px 4px;
   }
+  
   #combo-best-counter, #current-selection {
     display: block;
     margin: 4px 0 8px 0;
@@ -204,10 +230,12 @@ body {
     color: #666;
     word-break: break-all;
   }
+  
   #hiragana-display {
     font-size: 48px;
-    margin: 30px 0 10px 0;
+    margin: 20px 0 10px 0;
   }
+  
   #answer-input {
     width: 70vw;
     max-width: 220px;
@@ -218,6 +246,7 @@ body {
     border: 2px solid #ffa500;
     padding: 8px;
   }
+  
   #submit-answer {
     font-size: 16px;
     padding: 8px 14px;
@@ -267,6 +296,12 @@ body {
     border-radius: 0;
     max-width: 100vw;
   }
+  .nav-btns {
+    flex-direction: column;
+    gap: 12px;
+    max-width: 98vw;
+    padding: 0 2vw;
+  }
 }
 
 /* 애니메이션 */
@@ -315,11 +350,6 @@ body {
   background: #005fa3;
 }
 
-/* selection-screen 하단 패딩 확보 (버튼 가림 방지) */
-#selection-screen {
-  padding-bottom: 70px;
-}
-
 input[type="text"], button {
   font-family: inherit;
   border-radius: 12px;
@@ -360,26 +390,26 @@ input[type="text"], button {
   color: #e55;
 }
 
+/* 네비게이션 버튼 */
+.nav-btns {
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-top: 40px;
+  display: flex;
+  gap: 24px;
+}
+
 @media (max-width: 480px) {
-  #quiz-area {
-    padding: 0 2vw;
-  }
-  #hiragana-word {
-    font-size: 2.2rem;
-  }
-  #word-answer-input, #word-submit-answer {
-    width: 90vw;
-    max-width: 320px;
-    font-size: 1.1rem;
-    padding: 14px 10px;
-  }
-  #word-submit-answer, #word-restart-btn {
-    min-height: 44px;
-    font-size: 1.1rem;
-  }
   .nav-btns {
     flex-direction: column;
     gap: 12px;
+    max-width: 98vw;
+    padding: 0 2vw;
   }
 }
 
@@ -408,16 +438,6 @@ html, body {
   overflow: hidden;
 }
 
-.nav-btns {
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
 @media (max-width: 480px) {
   html, body {
     height: 100vh;
@@ -429,10 +449,6 @@ html, body {
     padding: 0;
   }
   #quiz-area {
-    max-width: 98vw;
-    padding: 0 2vw;
-  }
-  .nav-btns {
     max-width: 98vw;
     padding: 0 2vw;
   }

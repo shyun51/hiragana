@@ -402,6 +402,41 @@ input[type="text"], button {
   margin-top: 40px;
   display: flex;
   gap: 24px;
+  text-align: center;
+}
+
+.nav-btns a {
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-btns a:hover {
+  background: #f0f8ff;
+  color: #005fa3;
+}
+
+/* 행 선택 화면에서 네비게이션 버튼 위치 조정 */
+#selection-screen + .nav-btns {
+  margin-top: 20px;
+  margin-bottom: 80px; /* 고정 버튼과의 간격 */
+}
+
+/* 퀴즈 화면에서 네비게이션 버튼 위치 조정 */
+#quiz-screen .nav-btns {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0;
+  z-index: 999;
+  background: rgba(248, 250, 253, 0.95);
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 @media (max-width: 480px) {
@@ -410,6 +445,17 @@ input[type="text"], button {
     gap: 12px;
     max-width: 98vw;
     padding: 0 2vw;
+  }
+  
+  /* 모바일에서 퀴즈 화면의 네비게이션 버튼 위치 조정 */
+  #quiz-screen .nav-btns {
+    position: static;
+    transform: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
   }
 }
 

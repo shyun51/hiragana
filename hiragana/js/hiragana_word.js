@@ -223,6 +223,12 @@ function checkWordAnswer() {
   const input = document.getElementById('word-answer-input').value.trim();
   const feedback = document.getElementById('word-feedback');
   const answer = wordList[idx].answer;
+  
+  // 빈 답안일 때는 아무 상호작용 없음
+  if (input === "") {
+    return;
+  }
+  
   let isCorrect = false;
   if (Array.isArray(answer)) {
     isCorrect = answer.includes(input);

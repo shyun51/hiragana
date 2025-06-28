@@ -407,6 +407,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function checkAnswer() {
       const ans = answerInput.value.trim().toLowerCase();
+      
+      // 빈 답안일 때는 아무 상호작용 없음
+      if (ans === "") {
+        return;
+      }
+      
       if (currentCharacter.answers.includes(ans)) {
         if (isFirstAttempt) streak++;
         else streak = 1;

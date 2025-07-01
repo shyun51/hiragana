@@ -1,7 +1,7 @@
 import { shuffle } from './common.js';
 
 // 가타카나 단어와 한글 정답 예시 데이터 (실제 데이터는 필요에 따라 확장 가능)
-const wordList = [
+let wordList = [
   { kata: "クラス", answer: ["반"] },
   { kata: "プレゼント", answer: ["선물"] },
   { kata: "バンドぶ", answer: ["밴드부"] },
@@ -29,6 +29,36 @@ function saveWrongCounts() {
 }
 
 function startWordGame() {
+  // 오답 요소만으로 게임하는 모드인지 확인
+  if (localStorage.getItem('katakanaGameMode') === 'wrongOnly') {
+    const wrongChars = JSON.parse(localStorage.getItem('katakanaGameWrongChars') || '[]');
+    const wrongWords = JSON.parse(localStorage.getItem('katakanaGameWrongWords') || '[]');
+    // 글자와 단어를 합쳐서 wordList 생성 (글자는 answer를 발음으로, 단어는 answer를 뜻 없이)
+    wordList = [
+      ...wrongChars.map(([key, count]) => {
+        const [char, pron] = key.split('|');
+        return { kata: char, answer: [pron] };
+      }),
+      ...wrongWords.map(([key, count]) => {
+        const [word, pron] = key.split('|');
+        return { kata: word, answer: [pron] };
+      })
+    ];
+  } else {
+    // 기본 wordList로 복원 (초기 데이터)
+    wordList = [
+      { kata: "クラス", answer: ["반"] },
+      { kata: "プレゼント", answer: ["선물"] },
+      { kata: "バンドぶ", answer: ["밴드부"] },
+      { kata: "コンサート", answer: ["콘서트"] },
+      { kata: "デパート", answer: ["백화점"] },
+      { kata: "アメリカ", answer: ["미국"] },
+      { kata: "バス", answer: ["버스"] },
+      { kata: "レストラン", answer: ["레스토랑"] },
+      { kata: "バスケットボール", answer: ["농구"] },
+      { kata: "バスケ", answer: ["농구"]}
+    ];
+  }
   wordOrder = Array.from({length: wordList.length}, (_, i) => i);
   shuffle(wordOrder);
   currentIdx = 0;
@@ -64,6 +94,12 @@ function showWordQuestion() {
     feedback.textContent = `게임 종료! 정답: ${correctCount} / 오답: ${wrongCount}`;
     document.getElementById('word-restart-btn').style.display = 'inline-block';
     progress.textContent = '';
+    // 오답 게임 모드 종료 시 플래그 삭제
+    if (localStorage.getItem('katakanaGameMode') === 'wrongOnly') {
+      localStorage.removeItem('katakanaGameMode');
+      localStorage.removeItem('katakanaGameWrongChars');
+      localStorage.removeItem('katakanaGameWrongWords');
+    }
     return;
   }
   // 출제할 인덱스 결정

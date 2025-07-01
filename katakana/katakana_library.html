@@ -47,6 +47,7 @@
       <button onclick="location.href='../hiragana/hiragana_library.html'">히라가나 도서관으로 이동</button>
       <button onclick="location.href='katakana.html'">가타카나 메인으로</button>
       <button id="delete-all" style="background:#ffe0e0;color:#c00;margin-left:16px;">전체 삭제</button>
+      <button id="play-wrong-items" style="background:#e0ffe0;color:#0a0;margin-left:16px;">이 요소들로 게임하기</button>
     </div>
     <div class="section-title">글자</div>
     <div id="char-list" class="card-list"></div>
@@ -91,7 +92,28 @@
         renderLibrary();
       }
     }
+    function playWrongItems() {
+      // 오답 글자
+      const wrongChar = JSON.parse(localStorage.getItem('katakanaTextWrongCounts') || '{}');
+      // 오답 단어
+      const wrongWord = JSON.parse(localStorage.getItem('katakanaWordWrongCounts') || '{}');
+      // 오답 요소 추출
+      const wrongChars = Object.entries(wrongChar).filter(([k, v]) => v >= 5);
+      const wrongWords = Object.entries(wrongWord).filter(([k, v]) => v >= 5);
+      const total = wrongChars.length + wrongWords.length;
+      if (total < 3) {
+        alert('단어와 글자 수의 합이 3개 이상이 되어야 합니다.');
+        return;
+      }
+      // 오답 요소만 저장 (플래그 포함)
+      localStorage.setItem('katakanaGameMode', 'wrongOnly');
+      localStorage.setItem('katakanaGameWrongChars', JSON.stringify(wrongChars));
+      localStorage.setItem('katakanaGameWrongWords', JSON.stringify(wrongWords));
+      // 게임 페이지로 이동 (단어 게임으로 이동)
+      location.href = 'katakana_word.html';
+    }
     document.getElementById('delete-all').onclick = deleteAll;
+    document.getElementById('play-wrong-items').onclick = playWrongItems;
     renderLibrary();
   </script>
 </body>

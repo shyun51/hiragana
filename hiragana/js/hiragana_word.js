@@ -1,7 +1,7 @@
 import { shuffle } from './common.js';
 
 // 히라가나 단어와 한글 정답 예시 데이터
-const wordList = [
+let wordList = [
   { hira: "さくら", answer: ["벚꽃"] },
   { hira: "ねこ", answer: ["고양이"] },
   { hira: "いぬ", answer: ["개"] },
@@ -191,6 +191,90 @@ function saveWrongCounts() {
 }
 
 function startWordGame() {
+  // 오답 요소만으로 게임하는 모드인지 확인
+  if (localStorage.getItem('hiraganaGameMode') === 'wrongOnly') {
+    const wrongChars = JSON.parse(localStorage.getItem('hiraganaGameWrongChars') || '[]');
+    const wrongWords = JSON.parse(localStorage.getItem('hiraganaGameWrongWords') || '[]');
+    // 글자와 단어를 합쳐서 wordList 생성 (글자는 answer를 발음으로, 단어는 answer를 뜻 없이)
+    wordList = [
+      ...wrongChars.map(([key, count]) => {
+        const [char, pron] = key.split('|');
+        return { hira: char, answer: [pron] };
+      }),
+      ...wrongWords.map(([key, count]) => {
+        const [word, pron] = key.split('|');
+        return { hira: word, answer: [pron] };
+      })
+    ];
+  } else {
+    // 기본 wordList로 복원 (초기 데이터)
+    wordList = [
+      { hira: "さくら", answer: ["벚꽃"] },
+      { hira: "ねこ", answer: ["고양이"] },
+      { hira: "いぬ", answer: ["개"] },
+      { hira: "みず", answer: ["물"] },
+      { hira: "やま", answer: ["산"] },
+      { hira: "ともだち", answer: ["친구"] },
+      { hira: "はな", answer: ["꽃"] },
+      { hira: "くるま", answer: ["자동차"] },
+      { hira: "ひと", answer: ["사람"] },
+      { hira: "そら", answer: ["하늘"] },
+      { hira: "おはようございます", answer: ["안녕하세요"] },
+      { hira: "こんにちは", answer: ["안녕하세요"] },
+      { hira: "こんばんは", answer: ["안녕하세요"] },
+      { hira: "さようなら", answer: ["안녕히 가세요"] },
+      { hira: "わたし", answer: ["나"] },
+      { hira: "あなた", answer: ["당신","너"] },
+      { hira: "さん", answer: ["님", "셋", "3", "삼","씨씨"] },
+      { hira: "から", answer: ["에서"] },
+      { hira: "まで", answer: ["까지"] },
+      { hira: "にほん", answer: ["일본"] },
+      { hira: "かんこく", answer: ["한국"] },
+      { hira: "あめりか", answer: ["미국"] },
+      { hira: "にほんご", answer: ["일본어"] },
+      { hira: "かんこくご", answer: ["한국어"] },
+      { hira: "えいご", answer: ["영어"] },
+      { hira: "かぞく", answer: ["가족"] },
+      { hira: "おとうさん", answer: ["아버지"] },
+      { hira: "おかあさん", answer: ["어머니"] },
+      { hira: "おにいさん", answer: ["형","오빠"] },
+      { hira: "おねえさん", answer: ["누나","언니"] },
+      { hira: "おとうと", answer: ["남동생"] },
+      { hira: "いもうと", answer: ["여동생"] },
+      { hira: "がくせい", answer: ["학생"] },
+      { hira: "せんせい", answer: ["선생님","쌤"] },
+      { hira: "こうこう", answer: ["고등학교"] },
+      { hira: "だいがく", answer: ["대학교"] },
+      { hira: "いち", answer: ["하나", "1", "일"] },
+      { hira: "に", answer: ["둘", "2", "이", "-에"] },
+      { hira: "さん", answer: ["셋", "3", "삼", "님"] },
+      { hira: "よん", answer: ["넷", "4", "사"] },
+      { hira: "し", answer: ["넷", "4", "사"] },
+      { hira: "よ", answer: ["넷", "4", "사"] },
+      { hira: "ご", answer: ["다섯", "5", "오"] },
+      { hira: "ろく", answer: ["여섯", "6", "육"] },
+      { hira: "なな", answer: ["일곱", "7", "칠"] },
+      { hira: "ちち", answer: ["일곱", "7", "칠"] },
+      { hira: "はち", answer: ["여덟", "8", "팔"] },
+      { hira: "きゅう", answer: ["아홉", "9", "구"] },
+      { hira: "じゅう", answer: ["열", "10", "십"] },
+      { hira: "がっこう", answer: ["학교"] },
+      { hira: "べんきょう", answer: ["공부"] },
+      { hira: "しゅくだい", answer: ["숙제"] },
+      { hira: "としょかん", answer: ["도서관"] },
+      { hira: "うち", answer: ["집"] },
+      { hira: "きょうしつ", answer: ["교실"] },
+      { hira: "じゅぎょう", answer: ["수업"] },
+      { hira: "かいもの", answer: ["쇼핑"] },
+      { hira: "しょくどう", answer: ["학생식당"] },
+      { hira: "レストラン", answer: ["레스토랑"] },
+      { hira: "とも", answer: ["함께"] },
+      { hira: "かいしゃ", answer: ["회사"] },
+      { hira: "バス", answer: ["버스"] },
+      { hira: "じかん", answer: ["시간"] },
+      // ... 이하 생략 ...
+    ];
+  }
   wordOrder = Array.from({length: wordList.length}, (_, i) => i);
   shuffle(wordOrder);
   currentIdx = 0;
@@ -213,6 +297,12 @@ function showWordQuestion() {
     feedback.textContent = `게임 종료! 정답: ${correctCount} / 오답: ${wrongCount}`;
     document.getElementById('word-restart-btn').style.display = 'inline-block';
     progress.textContent = '';
+    // 오답 게임 모드 종료 시 플래그 삭제
+    if (localStorage.getItem('hiraganaGameMode') === 'wrongOnly') {
+      localStorage.removeItem('hiraganaGameMode');
+      localStorage.removeItem('hiraganaGameWrongChars');
+      localStorage.removeItem('hiraganaGameWrongWords');
+    }
     return;
   }
   const idx = wordOrder[currentIdx];

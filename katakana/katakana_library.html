@@ -39,6 +39,14 @@
       .main-title { font-size: 1.1rem; }
     }
   </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y23H9MYEP7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y23H9MYEP7');
+  </script>
 </head>
 <body>
   <div class="library-container">
@@ -97,9 +105,32 @@
       const wrongChar = JSON.parse(localStorage.getItem('katakanaTextWrongCounts') || '{}');
       // 오답 단어
       const wrongWord = JSON.parse(localStorage.getItem('katakanaWordWrongCounts') || '{}');
+      // 전체 단어/글자 데이터
+      const allWords = [
+        { kata: "クラス", answer: ["반"] },
+        { kata: "プレゼント", answer: ["선물"] },
+        { kata: "バンドぶ", answer: ["밴드부"] },
+        { kata: "コンサート", answer: ["콘서트"] },
+        { kata: "デパート", answer: ["백화점"] },
+        { kata: "アメリカ", answer: ["미국"] },
+        { kata: "バス", answer: ["버스"] },
+        { kata: "レストラン", answer: ["레스토랑"] },
+        { kata: "バスケットボール", answer: ["농구"] },
+        { kata: "バスケ", answer: ["농구"]}
+      ];
       // 오답 요소 추출
-      const wrongChars = Object.entries(wrongChar).filter(([k, v]) => v >= 5);
-      const wrongWords = Object.entries(wrongWord).filter(([k, v]) => v >= 5);
+      const wrongChars = Object.entries(wrongChar).filter(([k, v]) => v >= 5).map(([key, count]) => {
+        const [char, pron] = key.split('|');
+        // 글자 answer: 발음 + char(혹시 한글일 경우)
+        return { kata: char, answer: [pron, char] };
+      });
+      const wrongWords = Object.entries(wrongWord).filter(([k, v]) => v >= 5).map(([key, count]) => {
+        const [word, pron] = key.split('|');
+        // 뜻 전체를 allWords에서 찾아서 answer로 사용, 없으면 발음+단어 모두 answer에 포함
+        const found = allWords.find(w => w.kata === word);
+        if (found) return { kata: word, answer: found.answer.concat([pron, word]) };
+        return { kata: word, answer: [pron, word] };
+      });
       const total = wrongChars.length + wrongWords.length;
       if (total < 3) {
         alert('단어와 글자 수의 합이 3개 이상이 되어야 합니다.');

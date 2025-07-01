@@ -2,16 +2,15 @@ import { shuffle } from './common.js';
 
 // 가타카나 단어와 한글 정답 예시 데이터 (실제 데이터는 필요에 따라 확장 가능)
 const wordList = [
-  { kata: "アイス", answer: ["아이스"] },
-  { kata: "バナナ", answer: ["바나나"] },
-  { kata: "テレビ", answer: ["텔레비전", "티비"] },
-  { kata: "コーヒー", answer: ["커피"] },
-  { kata: "パン", answer: ["빵"] },
-  { kata: "ホテル", answer: ["호텔"] },
-  { kata: "タクシー", answer: ["택시"] },
-  { kata: "サッカー", answer: ["축구"] },
-  { kata: "コンピュータ", answer: ["컴퓨터"] },
-  { kata: "ジュース", answer: ["주스"] },
+  { kata: "クラス", answer: ["반"] },
+  { kata: "プレゼント", answer: ["선물"] },
+  { kata: "バンドぶ", answer: ["밴드부"] },
+  { kata: "コンサート", answer: ["콘서트"] },
+  { kata: "デパート", answer: ["백화점"] },
+  { kata: "アメリカ", answer: ["미국"] },
+  { kata: "バス", answer: ["버스"] },
+  { kata: "レストラン", answer: ["레스토랑"] },
+  { kata: "バスケットボール", answer: ["농구"] },
 ];
 
 let wordOrder = [];

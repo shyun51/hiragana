@@ -24,6 +24,44 @@
     <a href="hiragana_text.html">히라가나 글자 게임</a>
     <a href="hiragana_word.html">히라가나 단어 게임</a>
   </div>
+  <button id="show-hiragana-library" style="margin-top:24px;">나만의 히라가나 도서관</button>
+  <div id="hiragana-library" style="display:none; margin-top:24px;"></div>
   <div style="margin-top:40px;"><a href="../index.html">← 홈으로</a></div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('show-hiragana-library');
+    const lib = document.getElementById('hiragana-library');
+    btn.onclick = function() {
+      if (lib.style.display === 'none') {
+        // 도서관 데이터 표시
+        let html = '<h2>나만의 히라가나 도서관</h2>';
+        html += '<h3>글자</h3>';
+        html += '<table border="1" style="margin-bottom:16px;"><tr><th>글자</th><th>발음</th><th>틀린 횟수</th></tr>';
+        const wrongChar = JSON.parse(localStorage.getItem('hiraganaTextWrongCounts') || '{}');
+        for (const key in wrongChar) {
+          if (wrongChar[key] >= 5) {
+            const [char, pron] = key.split('|');
+            html += `<tr><td>${char}</td><td>${pron}</td><td>${wrongChar[key]}</td></tr>`;
+          }
+        }
+        html += '</table>';
+        html += '<h3>단어</h3>';
+        html += '<table border="1"><tr><th>글자</th><th>발음</th><th>뜻</th><th>틀린 횟수</th></tr>';
+        const wrongWord = JSON.parse(localStorage.getItem('hiraganaWordWrongCounts') || '{}');
+        for (const key in wrongWord) {
+          if (wrongWord[key] >= 5) {
+            const [word, pron] = key.split('|');
+            html += `<tr><td>${word}</td><td>${pron}</td><td>-</td><td>${wrongWord[key]}</td></tr>`;
+          }
+        }
+        html += '</table>';
+        lib.innerHTML = html;
+        lib.style.display = '';
+      } else {
+        lib.style.display = 'none';
+      }
+    };
+  });
+  </script>
 </body>
 </html>

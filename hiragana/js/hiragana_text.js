@@ -214,6 +214,9 @@ document.addEventListener("DOMContentLoaded", function() {
   
     let currentComboKey = "";
   
+    // 오답 기록용
+    let wrongCounts = JSON.parse(localStorage.getItem('hiraganaTextWrongCounts') || '{}');
+  
     function getComboKey(rows) {
       // 조합을 정렬해서 항상 같은 key가 되도록
       return rows.slice().sort().join(",");
@@ -367,6 +370,10 @@ document.addEventListener("DOMContentLoaded", function() {
         if (incorrectCount >= 5) {
           feedback.textContent += ` 힌트: 이 문자는 '${currentCharacter.row}'에 속합니다.`;
         }
+        // 오답 기록
+        const key = currentCharacter.char + '|' + currentCharacter.answers[0];
+        wrongCounts[key] = (wrongCounts[key] || 0) + 1;
+        saveWrongCounts();
       }
     }
   
@@ -405,5 +412,9 @@ document.addEventListener("DOMContentLoaded", function() {
         toggleRowSelectionBtn.textContent = "행 선택 펼치기";
       }
     });
+  
+    function saveWrongCounts() {
+      localStorage.setItem('hiraganaTextWrongCounts', JSON.stringify(wrongCounts));
+    }
   });
   

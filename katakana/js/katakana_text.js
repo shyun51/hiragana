@@ -33,6 +33,13 @@ let currentIndex = 0;
 let correctCount = 0;
 let wrongCount = 0;
 
+// 오답 기록용
+let wrongCounts = JSON.parse(localStorage.getItem('katakanaTextWrongCounts') || '{}');
+
+function saveWrongCounts() {
+  localStorage.setItem('katakanaTextWrongCounts', JSON.stringify(wrongCounts));
+}
+
 function startGame() {
   currentIndex = 0;
   correctCount = 0;
@@ -83,6 +90,10 @@ function checkAnswer() {
       currentIndex++;
       showQuestion();
     }, 1200);
+    // 오답 기록
+    const key = katakanaList[idx] + '|' + romajiList[idx];
+    wrongCounts[key] = (wrongCounts[key] || 0) + 1;
+    saveWrongCounts();
   }
 }
 
@@ -445,6 +456,10 @@ document.addEventListener("DOMContentLoaded", function() {
         if (incorrectCount >= 5) {
           feedback.textContent += ` 힌트: 이 문자는 '${currentCharacter.row}'에 속합니다.`;
         }
+        // 오답 기록
+        const key = katakanaList[currentIndex] + '|' + romajiList[currentIndex];
+        wrongCounts[key] = (wrongCounts[key] || 0) + 1;
+        saveWrongCounts();
       }
     }
 

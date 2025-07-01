@@ -183,6 +183,13 @@ let currentIdx = 0;
 let correctCount = 0;
 let wrongCount = 0;
 
+// 오답 기록용
+let wrongCounts = JSON.parse(localStorage.getItem('hiraganaWordWrongCounts') || '{}');
+
+function saveWrongCounts() {
+  localStorage.setItem('hiraganaWordWrongCounts', JSON.stringify(wrongCounts));
+}
+
 function startWordGame() {
   wordOrder = Array.from({length: wordList.length}, (_, i) => i);
   shuffle(wordOrder);
@@ -253,6 +260,10 @@ function checkWordAnswer() {
       currentIdx++;
       showWordQuestion();
     }, 1200);
+    // 오답 기록
+    const key = wordList[idx].hira + '|' + (wordList[idx].answer[0] || '');
+    wrongCounts[key] = (wrongCounts[key] || 0) + 1;
+    saveWrongCounts();
   }
 }
 

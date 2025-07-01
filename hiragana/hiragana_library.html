@@ -7,24 +7,26 @@
   <link rel="stylesheet" href="css/hiragana.css">
   <style>
     body { background: #f8fafd; font-family: 'Noto Sans KR', Arial, sans-serif; margin: 0; padding: 0; }
-    .library-container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px #0001; padding: 32px; }
-    h1 { text-align: center; margin-bottom: 16px; }
-    .move-btns { text-align: center; margin-bottom: 32px; }
-    .move-btns button { margin: 0 8px; padding: 10px 24px; border-radius: 8px; border: none; background: #e0e0ff; color: #333; font-weight: bold; cursor: pointer; font-size: 1.1rem; transition: background 0.2s; }
+    .library-container { max-width: 900px; margin: 60px auto 40px auto; background: #fff; border-radius: 24px; box-shadow: 0 6px 32px #0002; padding: 48px 32px 40px 32px; }
+    .main-title { text-align: center; font-size: 2.8rem; font-weight: bold; color: #3a3a6a; margin-bottom: 40px; letter-spacing: 2px; }
+    .move-btns { text-align: center; margin-bottom: 40px; }
+    .move-btns button { margin: 0 8px; padding: 12px 32px; border-radius: 10px; border: none; background: #e0e0ff; color: #333; font-weight: bold; cursor: pointer; font-size: 1.15rem; transition: background 0.2s; }
     .move-btns button:hover { background: #bdbdfc; }
-    .section-title { margin-top: 32px; font-size: 1.3rem; color: #444; border-bottom: 1px solid #eee; padding-bottom: 4px; }
-    .card-list { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; }
-    .card { background: #f3f6ff; border-radius: 10px; box-shadow: 0 2px 8px #0001; padding: 18px 20px; min-width: 120px; flex: 1 1 180px; text-align: center; }
-    .card .main { font-size: 2.2rem; font-weight: bold; margin-bottom: 8px; }
-    .card .pron { font-size: 1.1rem; color: #666; margin-bottom: 4px; }
-    .card .mean { font-size: 1rem; color: #888; margin-bottom: 4px; }
-    .card .wrong { font-size: 0.95rem; color: #e55; font-weight: bold; }
-    @media (max-width: 600px) { .library-container { padding: 10px; } .card { min-width: 90px; padding: 10px 6px; } }
+    .section-title { margin-top: 48px; font-size: 1.5rem; color: #444; border-bottom: 2px solid #e0e0ff; padding-bottom: 8px; margin-bottom: 24px; letter-spacing: 1px; }
+    .card-list { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 0; justify-content: flex-start; }
+    .card { background: #f3f6ff; border-radius: 14px; box-shadow: 0 2px 12px #0001; padding: 24px 28px; min-width: 140px; flex: 1 1 220px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .card .main { font-size: 2.5rem; font-weight: bold; margin-bottom: 10px; color: #2a2a5a; }
+    .card .pron { font-size: 1.15rem; color: #666; margin-bottom: 6px; }
+    .card .mean { font-size: 1.05rem; color: #888; margin-bottom: 6px; }
+    .card .wrong { font-size: 1.05rem; color: #e55; font-weight: bold; margin-top: 8px; }
+    .empty-msg { color: #aaa; font-size: 1.1rem; margin: 32px 0; text-align: center; width: 100%; }
+    @media (max-width: 900px) { .library-container { padding: 20px 4vw; } }
+    @media (max-width: 600px) { .library-container { padding: 10px 2vw; } .main-title { font-size: 2rem; } .card { min-width: 90px; padding: 12px 6px; } }
   </style>
 </head>
 <body>
   <div class="library-container">
-    <h1>나만의 히라가나 도서관</h1>
+    <div class="main-title">나만의 히라가나 도서관</div>
     <div class="move-btns">
       <button onclick="location.href='../katakana/katakana_library.html'">가타카나 도서관으로 이동</button>
       <button onclick="location.href='hiragana.html'">히라가나 메인으로</button>
@@ -42,10 +44,10 @@
     for (const key in wrongChar) {
       if (wrongChar[key] >= 5) {
         const [char, pron] = key.split('|');
-        charHtml += `<div class='card'><div class='main'>${char}</div><div class='pron'>${pron}</div><div class='wrong'>틀린 횟수: ${wrongChar[key]}</div></div>`;
+        charHtml += `<div class='card'><div class='main'>${char}</div><div class='pron'>발음: ${pron}</div><div class='wrong'>틀린 횟수: ${wrongChar[key]}</div></div>`;
       }
     }
-    charList.innerHTML = charHtml || '<div style="color:#aaa;">5회 이상 틀린 글자가 없습니다.</div>';
+    charList.innerHTML = charHtml || '<div class="empty-msg">5회 이상 틀린 글자가 없습니다.</div>';
     // 단어
     const wrongWord = JSON.parse(localStorage.getItem('hiraganaWordWrongCounts') || '{}');
     const wordList = document.getElementById('word-list');
@@ -53,10 +55,10 @@
     for (const key in wrongWord) {
       if (wrongWord[key] >= 5) {
         const [word, pron] = key.split('|');
-        wordHtml += `<div class='card'><div class='main'>${word}</div><div class='pron'>${pron}</div><div class='mean'>뜻: -</div><div class='wrong'>틀린 횟수: ${wrongWord[key]}</div></div>`;
+        wordHtml += `<div class='card'><div class='main'>${word}</div><div class='pron'>발음: ${pron}</div><div class='mean'>뜻: -</div><div class='wrong'>틀린 횟수: ${wrongWord[key]}</div></div>`;
       }
     }
-    wordList.innerHTML = wordHtml || '<div style="color:#aaa;">5회 이상 틀린 단어가 없습니다.</div>';
+    wordList.innerHTML = wordHtml || '<div class="empty-msg">5회 이상 틀린 단어가 없습니다.</div>';
   </script>
 </body>
 </html> 

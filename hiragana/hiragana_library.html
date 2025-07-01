@@ -14,11 +14,13 @@
     .move-btns button:hover { background: #bdbdfc; }
     .section-title { margin-top: 48px; font-size: 1.5rem; color: #444; border-bottom: 2px solid #e0e0ff; padding-bottom: 8px; margin-bottom: 24px; letter-spacing: 1px; }
     .card-list { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 0; justify-content: flex-start; }
-    .card { background: #f3f6ff; border-radius: 14px; box-shadow: 0 2px 12px #0001; padding: 24px 28px; min-width: 140px; flex: 1 1 220px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .card { background: #f3f6ff; border-radius: 14px; box-shadow: 0 2px 12px #0001; padding: 24px 28px; min-width: 140px; flex: 1 1 220px; text-align: center; display: flex; flex-direction: column; align-items: center; position: relative; }
     .card .main { font-size: 2.5rem; font-weight: bold; margin-bottom: 10px; color: #2a2a5a; }
     .card .pron { font-size: 1.15rem; color: #666; margin-bottom: 6px; }
     .card .mean { font-size: 1.05rem; color: #888; margin-bottom: 6px; }
     .card .wrong { font-size: 1.05rem; color: #e55; font-weight: bold; margin-top: 8px; }
+    .card .del-btn { position: absolute; top: 10px; right: 12px; background: #ffeded; color: #e55; border: none; border-radius: 50%; width: 28px; height: 28px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+    .card .del-btn:hover { background: #ffd0d0; }
     .empty-msg { color: #aaa; font-size: 1.1rem; margin: 32px 0; text-align: center; width: 100%; }
     @media (max-width: 900px) { .library-container { padding: 20px 4vw; } }
     @media (max-width: 600px) { .library-container { padding: 10px 2vw; } .main-title { font-size: 2rem; } .card { min-width: 90px; padding: 12px 6px; } }
@@ -30,6 +32,7 @@
     <div class="move-btns">
       <button onclick="location.href='../katakana/katakana_library.html'">가타카나 도서관으로 이동</button>
       <button onclick="location.href='hiragana.html'">히라가나 메인으로</button>
+      <button id="delete-all" style="background:#ffe0e0;color:#c00;margin-left:16px;">전체 삭제</button>
     </div>
     <div class="section-title">글자</div>
     <div id="char-list" class="card-list"></div>
@@ -37,28 +40,51 @@
     <div id="word-list" class="card-list"></div>
   </div>
   <script>
-    // 글자
-    const wrongChar = JSON.parse(localStorage.getItem('hiraganaTextWrongCounts') || '{}');
-    const charList = document.getElementById('char-list');
-    let charHtml = '';
-    for (const key in wrongChar) {
-      if (wrongChar[key] >= 5) {
-        const [char, pron] = key.split('|');
-        charHtml += `<div class='card'><div class='main'>${char}</div><div class='pron'>발음: ${pron}</div><div class='wrong'>틀린 횟수: ${wrongChar[key]}</div></div>`;
+    function renderLibrary() {
+      // 글자
+      const wrongChar = JSON.parse(localStorage.getItem('hiraganaTextWrongCounts') || '{}');
+      const charList = document.getElementById('char-list');
+      let charHtml = '';
+      for (const key in wrongChar) {
+        if (wrongChar[key] >= 5) {
+          const [char, pron] = key.split('|');
+          charHtml += `<div class='card' data-key='${key}'><button class='del-btn' title='삭제' onclick='deleteChar("${key}")'>&times;</button><div class='main'>${char}</div><div class='pron'>발음: ${pron}</div><div class='wrong'>틀린 횟수: ${wrongChar[key]}</div></div>`;
+        }
+      }
+      charList.innerHTML = charHtml || '<div class="empty-msg">5회 이상 틀린 글자가 없습니다.</div>';
+      // 단어
+      const wrongWord = JSON.parse(localStorage.getItem('hiraganaWordWrongCounts') || '{}');
+      const wordList = document.getElementById('word-list');
+      let wordHtml = '';
+      for (const key in wrongWord) {
+        if (wrongWord[key] >= 5) {
+          const [word, pron] = key.split('|');
+          wordHtml += `<div class='card' data-key='${key}'><button class='del-btn' title='삭제' onclick='deleteWord("${key}")'>&times;</button><div class='main'>${word}</div><div class='pron'>발음: ${pron}</div><div class='mean'>뜻: -</div><div class='wrong'>틀린 횟수: ${wrongWord[key]}</div></div>`;
+        }
+      }
+      wordList.innerHTML = wordHtml || '<div class="empty-msg">5회 이상 틀린 단어가 없습니다.</div>';
+    }
+    function deleteChar(key) {
+      const wrongChar = JSON.parse(localStorage.getItem('hiraganaTextWrongCounts') || '{}');
+      delete wrongChar[key];
+      localStorage.setItem('hiraganaTextWrongCounts', JSON.stringify(wrongChar));
+      renderLibrary();
+    }
+    function deleteWord(key) {
+      const wrongWord = JSON.parse(localStorage.getItem('hiraganaWordWrongCounts') || '{}');
+      delete wrongWord[key];
+      localStorage.setItem('hiraganaWordWrongCounts', JSON.stringify(wrongWord));
+      renderLibrary();
+    }
+    function deleteAll() {
+      if(confirm('정말 모든 오답 기록을 삭제하시겠습니까?')) {
+        localStorage.removeItem('hiraganaTextWrongCounts');
+        localStorage.removeItem('hiraganaWordWrongCounts');
+        renderLibrary();
       }
     }
-    charList.innerHTML = charHtml || '<div class="empty-msg">5회 이상 틀린 글자가 없습니다.</div>';
-    // 단어
-    const wrongWord = JSON.parse(localStorage.getItem('hiraganaWordWrongCounts') || '{}');
-    const wordList = document.getElementById('word-list');
-    let wordHtml = '';
-    for (const key in wrongWord) {
-      if (wrongWord[key] >= 5) {
-        const [word, pron] = key.split('|');
-        wordHtml += `<div class='card'><div class='main'>${word}</div><div class='pron'>발음: ${pron}</div><div class='mean'>뜻: -</div><div class='wrong'>틀린 횟수: ${wrongWord[key]}</div></div>`;
-      }
-    }
-    wordList.innerHTML = wordHtml || '<div class="empty-msg">5회 이상 틀린 단어가 없습니다.</div>';
+    document.getElementById('delete-all').onclick = deleteAll;
+    renderLibrary();
   </script>
 </body>
 </html> 

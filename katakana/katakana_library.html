@@ -28,6 +28,7 @@
     <div class="move-btns">
       <button onclick="location.href='../hiragana/hiragana_library.html'">히라가나 도서관으로 이동</button>
       <button onclick="location.href='katakana.html'">가타카나 메인으로</button>
+      <button id="delete-all" style="background:#ffe0e0;color:#c00;margin-left:16px;">전체 삭제</button>
     </div>
     <div class="section-title">글자</div>
     <div id="char-list" class="card-list"></div>
@@ -35,28 +36,45 @@
     <div id="word-list" class="card-list"></div>
   </div>
   <script>
-    // 글자
-    const wrongChar = JSON.parse(localStorage.getItem('katakanaTextWrongCounts') || '{}');
-    const charList = document.getElementById('char-list');
-    let charHtml = '';
-    for (const key in wrongChar) {
-      if (wrongChar[key] >= 5) {
-        const [char, pron] = key.split('|');
-        charHtml += `<div class='card'><div class='main'>${char}</div><div class='pron'>${pron}</div><div class='wrong'>틀린 횟수: ${wrongChar[key]}</div></div>`;
+    function renderLibrary() {
+      // 글자
+      const wrongChar = JSON.parse(localStorage.getItem('katakanaTextWrongCounts') || '{}');
+      const charList = document.getElementById('char-list');
+      let charHtml = '';
+      for (const key in wrongChar) {
+        if (wrongChar[key] >= 5) {
+          const [char, pron] = key.split('|');
+          charHtml += `<div class='card'><div class='main'>${char}</div><div class='pron'>${pron}</div><div class='wrong'>틀린 횟수: ${wrongChar[key]}</div></div>`;
+        }
+      }
+      charList.innerHTML = charHtml || '<div style="color:#aaa;">5회 이상 틀린 글자가 없습니다.</div>';
+      // 단어
+      const wrongWord = JSON.parse(localStorage.getItem('katakanaWordWrongCounts') || '{}');
+      const wordList = document.getElementById('word-list');
+      let wordHtml = '';
+      for (const key in wrongWord) {
+        if (wrongWord[key] >= 5) {
+          const [word, pron] = key.split('|');
+          wordHtml += `<div class='card'><div class='main'>${word}</div><div class='pron'>${pron}</div><div class='mean'>뜻: -</div><div class='wrong'>틀린 횟수: ${wrongWord[key]}</div></div>`;
+        }
+      }
+      wordList.innerHTML = wordHtml || '<div style="color:#aaa;">5회 이상 틀린 단어가 없습니다.</div>';
+    }
+    function deleteChar(key) {
+      // ... existing code ...
+    }
+    function deleteWord(key) {
+      // ... existing code ...
+    }
+    function deleteAll() {
+      if(confirm('정말 모든 오답 기록을 삭제하시겠습니까?')) {
+        localStorage.removeItem('katakanaTextWrongCounts');
+        localStorage.removeItem('katakanaWordWrongCounts');
+        renderLibrary();
       }
     }
-    charList.innerHTML = charHtml || '<div style="color:#aaa;">5회 이상 틀린 글자가 없습니다.</div>';
-    // 단어
-    const wrongWord = JSON.parse(localStorage.getItem('katakanaWordWrongCounts') || '{}');
-    const wordList = document.getElementById('word-list');
-    let wordHtml = '';
-    for (const key in wrongWord) {
-      if (wrongWord[key] >= 5) {
-        const [word, pron] = key.split('|');
-        wordHtml += `<div class='card'><div class='main'>${word}</div><div class='pron'>${pron}</div><div class='mean'>뜻: -</div><div class='wrong'>틀린 횟수: ${wrongWord[key]}</div></div>`;
-      }
-    }
-    wordList.innerHTML = wordHtml || '<div style="color:#aaa;">5회 이상 틀린 단어가 없습니다.</div>';
+    document.getElementById('delete-all').onclick = deleteAll;
+    renderLibrary();
   </script>
 </body>
 </html> 

@@ -17,35 +17,6 @@ h1 {
   letter-spacing: 2px;
 }
 
-.corgi-title-img {
-  width: 48px;
-  height: 48px;
-  vertical-align: middle;
-  border-radius: 50%;
-  margin-left: 8px;
-}
-
-.row-selection-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 24px;
-  margin-bottom: 12px;
-}
-.row-button {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: #f4f4ff;
-  border-radius: 8px;
-  padding: 4px 12px;
-  font-size: 1rem;
-}
-.selection-buttons {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   h1 {
@@ -53,24 +24,6 @@ h1 {
     margin-bottom: 30px;
     font-size: 1.8rem;
     letter-spacing: 1px;
-  }
-  
-  .corgi-title-img {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .row-selection-container {
-    gap: 8px 16px;
-  }
-  
-  .row-button {
-    padding: 3px 8px;
-    font-size: 0.9rem;
-  }
-  
-  .selection-buttons {
-    gap: 8px;
   }
 }
 
@@ -81,27 +34,6 @@ h1 {
     font-size: 1.5rem;
     letter-spacing: 0.5px;
   }
-  
-  .corgi-title-img {
-    width: 36px;
-    height: 36px;
-  }
-  
-  .row-selection-container {
-    gap: 6px 12px;
-    justify-content: center;
-  }
-  
-  .row-button {
-    padding: 2px 6px;
-    font-size: 0.8rem;
-  }
-  
-  .selection-buttons {
-    gap: 6px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
 }
 
 @media (max-width: 320px) {
@@ -109,23 +41,5 @@ h1 {
     font-size: 1.3rem;
     margin-top: 20px;
     margin-bottom: 15px;
-  }
-  
-  .corgi-title-img {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .row-selection-container {
-    gap: 4px 8px;
-  }
-  
-  .row-button {
-    padding: 1px 4px;
-    font-size: 0.75rem;
-  }
-  
-  .selection-buttons {
-    gap: 4px;
   }
 }

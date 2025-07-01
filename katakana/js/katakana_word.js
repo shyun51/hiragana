@@ -11,6 +11,7 @@ const wordList = [
   { kata: "バス", answer: ["버스"] },
   { kata: "レストラン", answer: ["레스토랑"] },
   { kata: "バスケットボール", answer: ["농구"] },
+  { kata: "バスケ", answer: ["농구"]}
 ];
 
 let wordOrder = [];

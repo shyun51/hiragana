@@ -363,4 +363,21 @@ document.getElementById('word-answer-input').addEventListener('keydown', functio
 });
 document.getElementById('word-restart-btn').onclick = startWordGame;
 
+// 정답보기 기능 추가
+document.getElementById('word-show-answer').onclick = function() {
+  const idx = wordOrder[currentIdx];
+  const feedback = document.getElementById('word-feedback');
+  const answer = wordList[idx].answer;
+  
+  feedback.textContent = `💡 정답: ${Array.isArray(answer) ? answer.join(', ') : answer}`;
+  feedback.style.color = '#0077cc';
+  feedback.style.fontWeight = 'bold';
+  
+  // 3초 후 다음 문제로 넘어가기
+  setTimeout(() => {
+    currentIdx++;
+    showWordQuestion();
+  }, 3000);
+};
+
 document.addEventListener('DOMContentLoaded', startWordGame);

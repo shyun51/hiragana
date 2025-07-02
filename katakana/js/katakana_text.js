@@ -300,6 +300,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const streakCtr       = document.getElementById("streak-counter");
     const bestCtr         = document.getElementById("best-counter");
     const humorBtn        = document.getElementById("humor-button");
+    const humorHelpBtn    = document.getElementById("humor-help-button");
     const currentSel      = document.getElementById("current-selection");
     const comboBestCtr    = document.getElementById("combo-best-counter");
     const showSelectedRowsBtn = document.getElementById("show-selected-rows");
@@ -348,6 +349,23 @@ document.addEventListener("DOMContentLoaded", function() {
       feedback.style.fontSize = "";
       feedback.style.color    = "";
       feedback.style.animation= "";
+    });
+
+    humorHelpBtn.addEventListener("click", () => {
+      const helpText = `😆 유머모드 도움말 😆
+
+틀릴 때마다 피드백이 점점 더 커지고 색이 변해요!
+- 1번 틀림: 주황색으로 커짐
+- 2번 틀림: 빨간색으로 더 커짐  
+- 3번 틀림: 진한 빨간색으로 더더 커짐
+- 4번 틀림: 검은색으로 최대 크기!
+
+그리고 흔들리는 애니메이션도 추가돼요! 😄`;
+      
+      if (confirm(helpText + "\n\n이 도움말을 다시 보시겠어요?")) {
+        // 사용자가 확인을 누르면 다시 보여줌
+        setTimeout(() => humorHelpBtn.click(), 100);
+      }
     });
 
     selectAllBtn.addEventListener("click", () => {

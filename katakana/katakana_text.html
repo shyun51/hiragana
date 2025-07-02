@@ -28,6 +28,10 @@
     <button type="button" id="show-selected-rows" style="margin-bottom:10px;">현재 선택한 행 보기</button>
     <button type="button" id="toggle-row-selection" style="margin-bottom:10px;">행 선택 접기</button>
     <div id="row-selection-accordion">
+      <div class="selection-buttons" style="margin-bottom:10px;">
+        <button type="button" id="select-all">모두 선택</button>
+        <button type="button" id="deselect-all">모두 취소</button>
+      </div>
       <form id="row-selection-form">
         <div class="row-selection-container">
           <div class="row-button">
@@ -91,10 +95,6 @@
             <label for="row_choon">장음</label>
           </div>
         </div>
-        <div class="selection-buttons">
-          <button type="button" id="select-all">모두 선택</button>
-          <button type="button" id="deselect-all">모두 취소</button>
-        </div>
       </form>
     </div>
   </div>
@@ -115,6 +115,7 @@
 
     <button id="home-button">HOME</button>
     <button id="humor-button">유머모드 Off</button>
+    <button id="humor-help-button" style="margin-left:10px; padding:8px 12px; font-size:12px; background:#f0f0f0; border:1px solid #ccc; border-radius:4px; cursor:pointer;">?</button>
   </div>
 
   <div class="nav-btns" style="margin-top:40px; display:flex; gap:24px; justify-content:center;">

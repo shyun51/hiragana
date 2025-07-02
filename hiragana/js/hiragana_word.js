@@ -44,6 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.showAnswerBtn.style.display = 'inline-block';
         elements.answerInput.style.display = 'inline-block';
 
+        elements.answerInput.disabled = false; // Enable input
+        elements.submitBtn.disabled = false; // Enable submit button
+        elements.showAnswerBtn.disabled = false; // Enable show answer button
+
         showNextWord();
     }
 
@@ -59,11 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.feedback.textContent = '';
         elements.progress.textContent = `${gameState.currentWordIndex + 1} / ${gameState.words.length}`;
         elements.answerInput.focus();
+
+        elements.answerInput.disabled = false; // Enable input
+        elements.submitBtn.disabled = false; // Enable submit button
+        elements.showAnswerBtn.disabled = false; // Enable show answer button
     }
 
     function checkAnswer() {
         const userAnswer = elements.answerInput.value.trim();
         if (userAnswer === '') return;
+
+        elements.answerInput.disabled = true; // Disable input
+        elements.submitBtn.disabled = true; // Disable submit button
+        elements.showAnswerBtn.disabled = true; // Disable show answer button
 
         const currentWord = gameState.words[gameState.currentWordIndex];
         const isCorrect = currentWord.answer.includes(userAnswer);
@@ -98,6 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showAnswer() {
+        elements.answerInput.disabled = true; // Disable input
+        elements.submitBtn.disabled = true; // Disable submit button
+        elements.showAnswerBtn.disabled = true; // Disable show answer button
+
         const currentWord = gameState.words[gameState.currentWordIndex];
         elements.feedback.textContent = `💡 정답: ${currentWord.answer.join(', ')}`;
         elements.feedback.className = 'info';
@@ -123,6 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.feedback.textContent = `게임 종료! 정답: ${gameState.correctCount} / 오답: ${gameState.wrongCount}`;
             elements.restartBtn.style.display = 'inline-block';
         }
+        elements.answerInput.disabled = true; // Ensure disabled at end of game
+        elements.submitBtn.disabled = true; // Ensure disabled at end of game
+        elements.showAnswerBtn.disabled = true; // Ensure disabled at end of game
     }
 
     elements.submitBtn.addEventListener('click', checkAnswer);

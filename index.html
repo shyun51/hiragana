@@ -7,7 +7,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>히라가나/가타카나 학습</title>
-  <h6>(insta)sl_hye0n에서 설문조사 한 번 씩 부탁드려요!</h6>
   
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y23H9MYEP7"></script>
@@ -19,6 +18,7 @@
     gtag('config', 'G-Y23H9MYEP7');
   </script>
   
+  <link rel="stylesheet" href="common/css/common.css">
   <style>
     body { 
       display: flex; 
@@ -35,27 +35,6 @@
       font-weight: bold;
       letter-spacing: 2px;
     }
-    .select-btns { 
-      display: flex; 
-      gap: 40px; 
-    }
-    .select-btns a { 
-      text-decoration: none; 
-      padding: 24px 48px; 
-      font-size: 1.5rem; 
-      border-radius: 12px; 
-      background: #fff; 
-      color: #333; 
-      border: 2px solid #aaa; 
-      transition: background 0.2s, color 0.2s; 
-      font-weight: bold; 
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    .select-btns a:hover { 
-      background: #e0e0ff; 
-      color: #222; 
-      border-color: #888; 
-    }
     
     /* 반응형 디자인 */
     @media (max-width: 768px) {
@@ -63,18 +42,6 @@
         margin-bottom: 30px;
         font-size: 1.8rem;
         letter-spacing: 1px;
-      }
-      
-      .select-btns {
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .select-btns a {
-        padding: 20px 36px;
-        font-size: 1.2rem;
-        border-radius: 10px;
       }
     }
     
@@ -84,20 +51,6 @@
         font-size: 1.5rem;
         letter-spacing: 0.5px;
       }
-      
-      .select-btns {
-        gap: 15px;
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .select-btns a {
-        padding: 16px 28px;
-        font-size: 1rem;
-        border-radius: 8px;
-        width: 200px;
-        text-align: center;
-      }
     }
     
     @media (max-width: 320px) {
@@ -105,20 +58,15 @@
         font-size: 1.3rem;
         margin-bottom: 20px;
       }
-      
-      .select-btns a {
-        width: 180px;
-        padding: 14px 24px;
-        font-size: 0.9rem;
-      }
     }
   </style>
 </head>
 <body>
+  <h6>(insta)sl_hye0n에서 설문조사 한 번 씩 부탁드려요!</h6>
   <h1>히라가나 / 가타카나 학습</h1>
   <div class="select-btns">
     <a href="hiragana/hiragana.html">히라가나</a>
     <a href="katakana/katakana.html">가타카나</a>
   </div>
 </body>
-</html> 
+</html>

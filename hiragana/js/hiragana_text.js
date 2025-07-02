@@ -1,4 +1,4 @@
-import { shuffle } from './common.js';
+import { shuffle } from '../../common/js/common.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     const hiraganaData = {

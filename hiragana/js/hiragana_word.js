@@ -1,4 +1,4 @@
-import { shuffle } from './common.js';
+import { shuffle } from '../../common/js/common.js';
 
 // 히라가나 단어와 한글 정답 예시 데이터
 let wordList = [

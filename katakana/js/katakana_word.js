@@ -1,4 +1,4 @@
-import { shuffle } from './common.js';
+import { shuffle } from '../../common/js/common.js';
 
 // 가타카나 단어와 한글 정답 예시 데이터 (실제 데이터는 필요에 따라 확장 가능)
 let wordList = [

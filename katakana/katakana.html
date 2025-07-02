@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>가타카나 메인</title>
-  <h6>(insta)sl_hye0n에서 설문조사 한 번 씩 부탁드려요!</h6>
+  
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y23H9MYEP7"></script>
   <script>
@@ -15,52 +15,25 @@
     gtag('config', 'G-Y23H9MYEP7');
   </script>
   
+  <link rel="stylesheet" href="../common/css/common.css">
   <link rel="stylesheet" href="css/katakana.css">
 </head>
 <body>
+  <h6>(insta)sl_hye0n에서 설문조사 한 번 씩 부탁드려요!</h6>
   <h1>가타카나 학습</h1>
   <div class="select-btns">
     <a href="katakana_text.html">가타카나 글자 게임</a>
     <a href="katakana_word.html">가타카나 단어 게임</a>
   </div>
-  <a href="katakana_library.html" target="_blank" style="display:block;margin:24px auto 0 auto;width:fit-content;padding:8px 18px;font-size:1rem;border-radius:8px;border:1.5px solid #aaa;background:#f8fafd;color:#222;text-decoration:none;font-weight:bold;box-shadow:0 2px 8px #0001;transition:background 0.2s;">나만의 가타카나 도서관</a>
-  <div id="katakana-library" style="display:none; margin-top:24px;"></div>
-  <div style="margin-top:40px;"><a href="../index.html">← 홈으로</a></div>
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.getElementById('show-katakana-library');
-    const lib = document.getElementById('katakana-library');
-    btn.onclick = function() {
-      if (lib.style.display === 'none') {
-        // 도서관 데이터 표시
-        let html = '<h2>나만의 가타카나 도서관</h2>';
-        html += '<h3>글자</h3>';
-        html += '<table border="1" style="margin-bottom:16px;"><tr><th>글자</th><th>발음</th><th>틀린 횟수</th></tr>';
-        const wrongChar = JSON.parse(localStorage.getItem('katakanaTextWrongCounts') || '{}');
-        for (const key in wrongChar) {
-          if (wrongChar[key] >= 5) {
-            const [char, pron] = key.split('|');
-            html += `<tr><td>${char}</td><td>${pron}</td><td>${wrongChar[key]}</td></tr>`;
-          }
-        }
-        html += '</table>';
-        html += '<h3>단어</h3>';
-        html += '<table border="1"><tr><th>글자</th><th>발음</th><th>뜻</th><th>틀린 횟수</th></tr>';
-        const wrongWord = JSON.parse(localStorage.getItem('katakanaWordWrongCounts') || '{}');
-        for (const key in wrongWord) {
-          if (wrongWord[key] >= 5) {
-            const [word, pron] = key.split('|');
-            html += `<tr><td>${word}</td><td>${pron}</td><td>-</td><td>${wrongWord[key]}</td></tr>`;
-          }
-        }
-        html += '</table>';
-        lib.innerHTML = html;
-        lib.style.display = '';
-      } else {
-        lib.style.display = 'none';
-      }
-    };
-  });
-  </script>
+  
+  <div class="library-buttons">
+    <button id="show-katakana-library-toggle" class="library-btn">나만의 가타카나 도서관 보기</button>
+    <a href="katakana_library.html" target="_blank" class="library-link">도서관 새 창으로 열기</a>
+  </div>
+
+  <div id="katakana-library" class="library-container"></div>
+  <div class="home-link"><a href="../index.html">← 홈으로</a></div>
+  
+  <script src="js/katakana.js"></script>
 </body>
 </html>

@@ -1,499 +1,289 @@
-@import url('hiragana.css');
+/* hiragana_text.css */
+
+@import url('../common/css/common.css');
 
 body {
-  font-family: 'Noto Sans KR', Arial, sans-serif;
-  background: #f8fafd;
-  color: #222;
-  text-align: center;
-  margin: 0;
-  padding: 20px;
-  height: 100vh;
-  overflow: hidden;
-  box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f8f8ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* 행 선택 화면에서만 스크롤 허용 */
-#selection-screen {
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-bottom: 70px;
-  box-sizing: border-box;
+.game-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
 }
 
-/* 퀴즈 화면은 스크롤 없이 한 화면에 담기 */
-#quiz-screen {
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  margin: 0;
-  max-width: none;
-  position: relative;
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh; /* Adjust as needed */
 }
 
-/* 행 선택 그리드 (표 형식) */
-.row-selection-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-  margin-top: 32px;
-  margin-bottom: 32px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 900px;
-  box-sizing: border-box;
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.row-selection-container + .row-selection-container {
-  margin-top: 0;
-  margin-bottom: 32px;
+.corgi-title-img {
+    height: 50px;
+    margin-right: 15px;
 }
 
-.row-button {
-  border: 3px solid #333;
-  border-radius: 14px;
-  padding: 12px 18px;
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f0f0f0;
-  margin: 0;
-  box-sizing: border-box;
-  font-size: 1.08rem;
-  font-weight: 500;
-  transition: background 0.2s, border 0.2s;
+h1 {
+    font-size: 1.8rem;
+    margin: 0;
 }
 
-.row-button input[type="checkbox"] {
-  margin-right: 8px;
-  width: 20px;
-  height: 20px;
+/* Selection Screen */
+.selection-controls {
+    margin-bottom: 20px;
 }
 
-.row-button input[type="checkbox"]:checked + label {
-  background-color: #a0d8f1;
-  padding: 3px 5px;
-  border-radius: 3px;
+.selected-list {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    word-break: break-all;
+    display: none; /* Controlled by JS */
+}
+
+.accordion-content {
+    display: none; /* Controlled by JS */
+    margin-bottom: 20px;
 }
 
 .selection-buttons {
-  margin-bottom: 20px;
-}
-.selection-buttons button {
-  font-size: 18px;
-  padding: 10px 20px;
-  margin: 0 10px;
-  cursor: pointer;
+    margin-bottom: 15px;
 }
 
-#streak-counter {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
-#best-counter {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
-#combo-best-counter, #current-selection {
-  display: block;
-  margin: 4px 0 8px 0;
-  font-size: 13px;
-  color: #666;
-  word-break: break-all;
-}
-#hiragana-display {
-  font-size: 80px;
-  margin: 40px 0 20px 0;
-}
-#answer-input {
-  font-size: 18px;
-  padding: 12px;
-  width: 280px;
-  margin-bottom: 16px;
-}
-#submit-answer {
-  font-size: 18px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 2px solid #aaa;
-  background: #fff;
-  font-weight: bold;
-  margin-left: 12px;
-  transition: background 0.2s, color 0.2s;
-}
-#submit-answer:hover {
-  background: #e0e0ff;
-  color: #222;
-}
-#feedback {
-  color: red;
-  font-weight: bold;
-  margin-top: 20px;
-  max-width: 90vw;
-  word-break: break-word;
-  white-space: normal;
-}
-#home-button {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-#humor-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 18px;
-  padding: 8px 16px;
-  cursor: pointer;
-}
-.corgi-title-img {
-  height: 60px;
-  width: auto;
-  background: transparent;
-  border-radius: 8px;
-  padding: 0;
-  box-shadow: none;
-  object-fit: contain;
-  display: inline-block;
-}
-
-@media (max-width: 900px) {
-  .row-selection-container {
-    max-width: 98vw;
+.row-selection-container {
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 10px;
-    justify-content: center;
-  }
-  .row-button {
-    font-size: 15px;
-    padding: 10px 8px;
-  }
-}
-@media (max-width: 600px) {
-  .row-selection-container {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 8px;
-    justify-content: center;
-  }
-  .row-button {
-    font-size: 14px;
-    padding: 8px 4px;
-    margin: 0;
-  }
-}
-@media (max-width: 480px) {
-  body {
-    padding: 8px;
-  }
-  
-  #selection-screen {
-    padding: 8px;
-    padding-bottom: 70px;
-  }
-  
-  #quiz-screen {
-    padding: 8px;
-    justify-content: space-between;
-  }
-  
-  #streak-counter, #best-counter {
-    position: static;
-    display: inline-block;
-    font-size: 16px;
-    margin: 0 4px 6px 4px;
-  }
-  
-  #combo-best-counter, #current-selection {
-    display: block;
-    margin: 4px 0 8px 0;
-    font-size: 13px;
-    color: #666;
-    word-break: break-all;
-  }
-  
-  #hiragana-display {
-    font-size: 48px;
-    margin: 20px 0 10px 0;
-  }
-  
-  #answer-input {
-    width: 70vw;
-    max-width: 220px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    margin-right: 8px;
-    border-radius: 8px;
-    border: 2px solid #ffa500;
-    padding: 8px;
-  }
-  
-  #submit-answer {
-    font-size: 16px;
-    padding: 8px 14px;
-    border-radius: 8px;
-  }
-  .row-selection-container {
-    gap: 6px 2vw;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 18px;
-  }
-  .row-button {
-    flex: 1 1 90vw;
-    min-width: 70px;
-    max-width: 98vw;
-    font-size: 13.5px;
-    padding: 8px 2vw;
-    margin: 0;
-  }
-  .row-button input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin-right: 6px;
-  }
-  .selection-buttons {
-    margin-bottom: 10px;
-  }
-  button, .selection-buttons button, #humor-button {
-    font-size: 15px;
-    padding: 7px 12px;
-    border-radius: 8px;
-  }
-  #home-button, #humor-button {
-    position: static;
-    margin: 10px 4px 0 4px;
-    transform: none;
-  }
-  .corgi-title-img {
-    height: 40px;
-    min-width: 32px;
-    max-width: 60px;
-    border-radius: 6px;
-  }
-  .fixed-quiz-btn {
-    font-size: 17px;
-    padding: 14px 0 14px 0;
-    border-radius: 0;
-    max-width: 100vw;
-  }
-  .nav-btns {
-    flex-direction: column;
-    gap: 12px;
-    max-width: 98vw;
-    padding: 0 2vw;
-  }
-}
-
-/* 애니메이션 */
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.6; }
-  100% { opacity: 1; }
-}
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
-
-/* 퀴즈 시작 버튼은 selection-screen이 보일 때만 고정 */
-#selection-screen:not([style*="display: none"]) ~ .fixed-quiz-btn {
-  display: block;
-}
-#selection-screen[style*="display: none"] ~ .fixed-quiz-btn {
-  display: none !important;
-}
-
-/* 퀴즈 시작 버튼 고정 스타일 */
-.fixed-quiz-btn {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100vw;
-  max-width: 100vw;
-  margin: 0;
-  z-index: 1000;
-  background: #0077cc;
-  color: #fff;
-  font-size: 22px;
-  font-weight: bold;
-  border-radius: 0;
-  box-shadow: 0 -2px 8px #bbb;
-  padding: 18px 0 18px 0;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.fixed-quiz-btn:hover {
-  background: #005fa3;
-}
-
-input[type="text"], button {
-  font-family: inherit;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-#word-answer-input:focus {
-  border: 2px solid #4a90e2;
-  outline: none;
-  background: #f0f8ff;
-}
-
-#word-submit-answer, #word-restart-btn {
-  min-width: 100px;
-  min-height: 48px;
-  font-size: 1.2rem;
-  margin: 8px 0;
-}
-
-#word-submit-answer:active, #word-restart-btn:active {
-  background: #d0eaff;
-}
-
-#word-feedback {
-  margin-top: 24px;
-  font-size: 1.3rem;
-  min-height: 36px;
-  font-weight: bold;
-  transition: color 0.2s;
-}
-#word-feedback.correct {
-  color: #2a8;
-}
-#word-feedback.wrong {
-  color: #e55;
-}
-
-/* 네비게이션 버튼 */
-.nav-btns {
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  margin-top: 40px;
-  display: flex;
-  gap: 24px;
-  text-align: center;
-}
-
-.nav-btns a {
-  text-decoration: none;
-  color: #0077cc;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: background 0.2s, color 0.2s;
-}
-
-.nav-btns a:hover {
-  background: #f0f8ff;
-  color: #005fa3;
-}
-
-/* 행 선택 화면에서 네비게이션 버튼 위치 조정 */
-#selection-screen + .nav-btns {
-  margin-top: 20px;
-  margin-bottom: 80px; /* 고정 버튼과의 간격 */
-}
-
-/* 퀴즈 화면에서 네비게이션 버튼 위치 조정 */
-#quiz-screen .nav-btns {
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 0;
-  z-index: 999;
-  background: rgba(248, 250, 253, 0.95);
-  padding: 12px 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-@media (max-width: 480px) {
-  .nav-btns {
-    flex-direction: column;
-    gap: 12px;
-    max-width: 98vw;
-    padding: 0 2vw;
-  }
-  
-  /* 모바일에서 퀴즈 화면의 네비게이션 버튼 위치 조정 */
-  #quiz-screen .nav-btns {
-    position: static;
-    transform: none;
     margin-top: 20px;
+}
+
+.row-button {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.row-button:hover {
+    background-color: #e0e0ff;
+    border-color: #888;
+}
+
+.row-button input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.row-button input[type="checkbox"]:checked + label {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Quiz Screen */
+.score-board {
     margin-bottom: 20px;
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-  }
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
-html, body {
-  height: 100vh;
-  overflow: hidden;
-  box-sizing: border-box;
+.score-board span {
+    margin: 0 10px;
 }
 
-#word-game-screen {
-  min-height: 100vh;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  overflow: hidden;
+.current-selection {
+    margin-bottom: 20px;
+    color: #666;
 }
 
-#quiz-area {
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
-  padding: 0 8px;
-  overflow: hidden;
+#hiragana-display {
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-@media (max-width: 480px) {
-  html, body {
-    height: 100vh;
-    overflow: hidden;
-  }
-  #word-game-screen {
-    min-height: 100vh;
-    height: 100vh;
-    padding: 0;
-  }
-  #quiz-area {
-    max-width: 98vw;
-    padding: 0 2vw;
-  }
-  #word-answer-input, #word-submit-answer {
-    width: 100%;
-    max-width: 98vw;
+#answer-input {
+    width: 80%;
+    max-width: 300px;
+    padding: 10px;
+    font-size: 1.2rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
     box-sizing: border-box;
-  }
+    margin-bottom: 10px;
+}
+
+.hint-text {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+#feedback {
+    min-height: 24px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.quiz-controls {
+    margin-top: 20px;
+}
+
+.quiz-controls .btn {
+    margin: 0 5px;
+}
+
+/* Common button styles (from common.css or defined here if not in common) */
+.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn:hover {
+    background-color: #e0e0ff;
+    border-color: #888;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-icon {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.nav-btns {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav-btns .btn {
+    text-decoration: none;
+    color: #007bff;
+    background-color: transparent;
+    border: none;
+}
+
+.nav-btns .btn:hover {
+    color: #0056b3;
+    background-color: transparent;
+}
+
+/* Fixed quiz start button */
+#start-quiz.btn-primary {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 400px;
+    padding: 15px 0;
+    font-size: 1.3rem;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+/* Humor mode feedback animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .game-container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .corgi-title-img {
+        height: 40px;
+    }
+
+    #hiragana-display {
+        font-size: 4rem;
+    }
+
+    #answer-input {
+        width: 90%;
+    }
+
+    .score-board {
+        font-size: 1rem;
+    }
+
+    .score-board span {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .row-selection-container {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .row-button {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    #start-quiz.btn-primary {
+        width: calc(100% - 20px);
+        padding: 12px 0;
+        font-size: 1.1rem;
+    }
+
+    .nav-btns {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

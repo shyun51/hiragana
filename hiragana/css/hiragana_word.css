@@ -1,295 +1,119 @@
-@import url('hiragana.css');
-
-/* 히라가나 단어 학습 페이지 스타일 */
 body {
-  font-family: 'Noto Sans KR', Arial, sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 20px;
-  height: 100vh;
-  overflow: hidden;
-  box-sizing: border-box;
-  background: #f8fafd;
-  color: #222;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f8f8ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-#word-game-screen {
-  min-height: 100vh;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  overflow: hidden;
-  text-align: center;
+.game-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
 }
 
-.title-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-
-.title-container h1 {
-  margin-bottom: 0;
-  font-size: 2rem;
-  color: #222;
-}
-
-#quiz-area {
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
-  padding: 0 8px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 40px 0 20px 0;
-}
-
-#hiragana-word {
-  font-size: 2.5rem;
-  margin-bottom: 24px;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
-}
-
-#word-answer-input {
-  font-size: 1.3rem;
-  padding: 8px 16px;
-  width: 260px;
-  border-radius: 8px;
-  border: 2px solid #aaa;
-  text-align: center;
-  box-sizing: border-box;
-  margin-bottom: 16px;
-}
-
-#word-submit-answer {
-  font-size: 1.1rem;
-  margin-left: 12px;
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 2px solid #aaa;
-  background: #fff;
-  font-weight: bold;
-  transition: background 0.2s, color 0.2s;
-  cursor: pointer;
-}
-
-#word-submit-answer:hover {
-  background: #e0e0ff;
-  color: #222;
-}
-
-#word-feedback {
-  margin-top: 20px;
-  min-height: 32px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-}
-
-#word-progress {
-  margin-top: 16px;
-  color: #888;
-  text-align: center;
-  font-size: 1rem;
-}
-
-#word-restart-btn {
-  font-size: 1.1rem;
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 2px solid #aaa;
-  background: #fff;
-  font-weight: bold;
-  margin-top: 24px;
-  transition: background 0.2s, color 0.2s;
-  cursor: pointer;
-  display: none;
-}
-
-#word-restart-btn:hover {
-  background: #e0e0ff;
-  color: #222;
-}
-
-/* 네비게이션 버튼 */
-.nav-btns {
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  margin-top: 40px;
-  display: flex;
-  gap: 24px;
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 .corgi-title-img {
-  height: 60px;
-  width: auto;
-  background: transparent;
-  border-radius: 8px;
-  padding: 0;
-  box-shadow: none;
-  object-fit: contain;
-  display: inline-block;
+    height: 50px;
+    margin-right: 15px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+#quiz-area {
+    margin-bottom: 20px;
+}
+
+#hiragana-word {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#word-answer-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+#word-feedback {
+    min-height: 24px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.correct {
+    color: #28a745;
+}
+
+.wrong {
+    color: #dc3545;
+}
+
+.info {
+    color: #17a2b8;
+}
+
+#word-progress {
+    color: #6c757d;
+}
+
+.game-footer .btn,
+.button-group .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+#word-restart-btn {
+    display: none;
+}
+
+.nav-btns {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 /* 반응형 디자인 */
-@media (max-width: 768px) {
-  body {
-    padding: 15px;
-  }
-  
-  #word-game-screen {
-    padding: 15px;
-  }
-  
-  .title-container h1 {
-    font-size: 1.8rem;
-  }
-  
-  #quiz-area {
-    max-width: 500px;
-  }
-  
-  #hiragana-word {
-    font-size: 2.2rem;
-    margin-bottom: 20px;
-  }
-  
-  #word-answer-input {
-    width: 240px;
-    font-size: 1.2rem;
-    padding: 10px;
-  }
-  
-  #word-submit-answer {
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
-  
-  #word-feedback {
-    font-size: 1.1rem;
-  }
-  
-  #word-restart-btn {
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
-}
-
 @media (max-width: 480px) {
-  body {
-    padding: 10px;
-  }
-  
-  #word-game-screen {
-    padding: 10px;
-  }
-  
-  .title-container h1 {
-    font-size: 1.5rem;
-  }
-  
-  .corgi-title-img {
-    height: 40px;
-    min-width: 32px;
-    max-width: 60px;
-    border-radius: 6px;
-  }
-  
-  #quiz-area {
-    max-width: 98vw;
-    padding: 0 2vw;
-  }
-  
-  #hiragana-word {
-    font-size: 2rem;
-    margin-bottom: 16px;
-  }
-  
-  #word-answer-input {
-    width: 80vw;
-    max-width: 250px;
-    font-size: 1.1rem;
-    padding: 8px;
-    margin-bottom: 12px;
-  }
-  
-  #word-submit-answer {
-    font-size: 1rem;
-    padding: 8px 16px;
-    margin-left: 8px;
-  }
-  
-  #word-feedback {
-    font-size: 1rem;
-    margin-top: 12px;
-  }
-  
-  #word-progress {
-    font-size: 0.9rem;
-  }
-  
-  #word-restart-btn {
-    font-size: 1rem;
-    padding: 8px 16px;
-    margin-top: 16px;
-  }
-  
-  .nav-btns {
-    flex-direction: column;
-    gap: 12px;
-    max-width: 98vw;
-    padding: 0 2vw;
-  }
-}
+    h1 {
+        font-size: 1.5rem;
+    }
 
-@media (max-width: 320px) {
-  .title-container h1 {
-    font-size: 1.3rem;
-  }
-  
-  #hiragana-word {
-    font-size: 1.8rem;
-    margin-bottom: 12px;
-  }
-  
-  #word-answer-input {
-    width: 85vw;
-    font-size: 1rem;
-    padding: 6px;
-  }
-  
-  #word-submit-answer {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
-  
-  #word-feedback {
-    font-size: 0.9rem;
-  }
-  
-  #word-progress {
-    font-size: 0.8rem;
-  }
-  
-  #word-restart-btn {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
+    #hiragana-word {
+        font-size: 2.5rem;
+    }
+
+    #word-answer-input {
+        font-size: 1rem;
+    }
 }

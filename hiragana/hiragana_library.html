@@ -4,41 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>나만의 히라가나 도서관</title>
-  <link rel="stylesheet" href="css/hiragana.css">
-  <style>
-    body { background: #f8fafd; font-family: 'Noto Sans KR', Arial, sans-serif; margin: 0; padding: 0; }
-    .library-container { max-width: 900px; margin: 60px auto 40px auto; background: #fff; border-radius: 24px; box-shadow: 0 6px 32px #0002; padding: 48px 32px 40px 32px; }
-    .main-title { text-align: center; font-size: 2.8rem; font-weight: bold; color: #3a3a6a; margin-bottom: 40px; letter-spacing: 2px; }
-    .move-btns { text-align: center; margin-bottom: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-    .move-btns button { margin: 0 8px; padding: 12px 32px; border-radius: 10px; border: none; background: #e0e0ff; color: #333; font-weight: bold; cursor: pointer; font-size: 1.15rem; transition: background 0.2s; }
-    .move-btns button:hover { background: #bdbdfc; }
-    .section-title { margin-top: 48px; font-size: 1.5rem; color: #444; border-bottom: 2px solid #e0e0ff; padding-bottom: 8px; margin-bottom: 24px; letter-spacing: 1px; }
-    .card-list { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 0; justify-content: flex-start; align-items: stretch; }
-    .card { background: #f3f6ff; border-radius: 14px; box-shadow: 0 2px 12px #0001; padding: 20px 10px; min-width: 110px; max-width: 180px; flex: 1 1 120px; text-align: center; display: flex; flex-direction: column; align-items: center; position: relative; margin-bottom: 8px; }
-    .card .main { font-size: 2.1rem; font-weight: bold; margin-bottom: 10px; color: #2a2a5a; }
-    .card .pron { font-size: 1.05rem; color: #666; margin-bottom: 6px; }
-    .card .mean { font-size: 1rem; color: #888; margin-bottom: 6px; }
-    .card .wrong { font-size: 1rem; color: #e55; font-weight: bold; margin-top: 8px; }
-    .card .del-btn { position: absolute; top: 10px; right: 12px; background: #ffeded; color: #e55; border: none; border-radius: 50%; width: 28px; height: 28px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background 0.2s; }
-    .card .del-btn:hover { background: #ffd0d0; }
-    .empty-msg { color: #aaa; font-size: 1.1rem; margin: 32px 0; text-align: center; width: 100%; }
-    @media (max-width: 900px) { .library-container { padding: 20px 4vw; } }
-    @media (max-width: 600px) {
-      .library-container { padding: 8px 1vw; margin: 20px auto 10px auto; }
-      .main-title { font-size: 1.5rem; margin-bottom: 18px; }
-      .move-btns button { font-size: 1rem; padding: 8px 12px; border-radius: 8px; }
-      .section-title { font-size: 1.1rem; margin-top: 24px; margin-bottom: 12px; padding-bottom: 4px; }
-      .card-list { gap: 8px; }
-      .card { min-width: 44vw; max-width: 48vw; padding: 8px 2vw; font-size: 0.95rem; }
-      .card .main { font-size: 1.2rem; }
-      .card .pron, .card .mean, .card .wrong { font-size: 0.95rem; }
-      .card .del-btn { width: 22px; height: 22px; font-size: 0.95rem; top: 6px; right: 6px; }
-    }
-    @media (max-width: 400px) {
-      .card { min-width: 90vw; max-width: 98vw; }
-      .main-title { font-size: 1.1rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="../common/css/common.css">
+  <link rel="stylesheet" href="css/hiragana_library.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y23H9MYEP7"></script>
   <script>
@@ -52,107 +19,16 @@
   <div class="library-container">
     <div class="main-title">나만의 히라가나 도서관</div>
     <div class="move-btns">
-      <button onclick="location.href='../katakana/katakana_library.html'">가타카나 도서관으로 이동</button>
-      <button onclick="location.href='hiragana.html'">히라가나 메인으로</button>
-      <button id="delete-all" style="background:#ffe0e0;color:#c00;margin-left:16px;">전체 삭제</button>
-      <button id="play-wrong-items" style="background:#e0ffe0;color:#0a0;margin-left:16px;">이 요소들로 게임하기</button>
+      <button onclick="location.href='../katakana/katakana_library.html'" class="btn">가타카나 도서관으로 이동</button>
+      <button onclick="location.href='hiragana.html'" class="btn">히라가나 메인으로</button>
+      <button id="delete-all" class="btn btn-danger">전체 삭제</button>
+      <button id="play-wrong-items" class="btn btn-success">이 요소들로 게임하기</button>
     </div>
     <div class="section-title">글자</div>
     <div id="char-list" class="card-list"></div>
     <div class="section-title">단어</div>
     <div id="word-list" class="card-list"></div>
   </div>
-  <script>
-    function renderLibrary() {
-      // 글자
-      const wrongChar = JSON.parse(localStorage.getItem('hiraganaTextWrongCounts') || '{}');
-      const charList = document.getElementById('char-list');
-      let charHtml = '';
-      for (const key in wrongChar) {
-        if (wrongChar[key] >= 5) {
-          const [char, pron] = key.split('|');
-          charHtml += `<div class='card' data-key='${key}'><button class='del-btn' title='삭제' onclick='deleteChar("${key}")'>&times;</button><div class='main'>${char}</div><div class='pron'>발음: ${pron}</div><div class='wrong'>틀린 횟수: ${wrongChar[key]}</div></div>`;
-        }
-      }
-      charList.innerHTML = charHtml || '<div class="empty-msg">5회 이상 틀린 글자가 없습니다.</div>';
-      // 단어
-      const wrongWord = JSON.parse(localStorage.getItem('hiraganaWordWrongCounts') || '{}');
-      const wordList = document.getElementById('word-list');
-      let wordHtml = '';
-      for (const key in wrongWord) {
-        if (wrongWord[key] >= 5) {
-          const [word, pron] = key.split('|');
-          wordHtml += `<div class='card' data-key='${key}'><button class='del-btn' title='삭제' onclick='deleteWord("${key}")'>&times;</button><div class='main'>${word}</div><div class='pron'>발음: ${pron}</div><div class='mean'>뜻: -</div><div class='wrong'>틀린 횟수: ${wrongWord[key]}</div></div>`;
-        }
-      }
-      wordList.innerHTML = wordHtml || '<div class="empty-msg">5회 이상 틀린 단어가 없습니다.</div>';
-    }
-    function deleteChar(key) {
-      const wrongChar = JSON.parse(localStorage.getItem('hiraganaTextWrongCounts') || '{}');
-      delete wrongChar[key];
-      localStorage.setItem('hiraganaTextWrongCounts', JSON.stringify(wrongChar));
-      renderLibrary();
-    }
-    function deleteWord(key) {
-      const wrongWord = JSON.parse(localStorage.getItem('hiraganaWordWrongCounts') || '{}');
-      delete wrongWord[key];
-      localStorage.setItem('hiraganaWordWrongCounts', JSON.stringify(wrongWord));
-      renderLibrary();
-    }
-    function deleteAll() {
-      if(confirm('정말 모든 오답 기록을 삭제하시겠습니까?')) {
-        localStorage.removeItem('hiraganaTextWrongCounts');
-        localStorage.removeItem('hiraganaWordWrongCounts');
-        renderLibrary();
-      }
-    }
-    function playWrongItems() {
-      // 오답 글자
-      const wrongChar = JSON.parse(localStorage.getItem('hiraganaTextWrongCounts') || '{}');
-      // 오답 단어
-      const wrongWord = JSON.parse(localStorage.getItem('hiraganaWordWrongCounts') || '{}');
-      // 전체 단어/글자 데이터
-      const allWords = [
-        { hira: "さくら", answer: ["벚꽃"] },
-        { hira: "ねこ", answer: ["고양이"] },
-        { hira: "いぬ", answer: ["개"] },
-        { hira: "みず", answer: ["물"] },
-        { hira: "やま", answer: ["산"] },
-        { hira: "ともだち", answer: ["친구"] },
-        { hira: "はな", answer: ["꽃"] },
-        { hira: "くるま", answer: ["자동차"] },
-        { hira: "ひと", answer: ["사람"] },
-        { hira: "そら", answer: ["하늘"] },
-        // ... 필요시 전체 단어 추가 ...
-      ];
-      // 오답 요소 추출
-      const wrongChars = Object.entries(wrongChar).filter(([k, v]) => v >= 5).map(([key, count]) => {
-        const [char, pron] = key.split('|');
-        // 글자 answer: 발음 + char(혹시 한글일 경우)
-        return { hira: char, answer: [pron, char] };
-      });
-      const wrongWords = Object.entries(wrongWord).filter(([k, v]) => v >= 5).map(([key, count]) => {
-        const [word, pron] = key.split('|');
-        // 뜻 전체를 allWords에서 찾아서 answer로 사용, 없으면 발음+단어 모두 answer에 포함
-        const found = allWords.find(w => w.hira === word);
-        if (found) return { hira: word, answer: found.answer.concat([pron, word]) };
-        return { hira: word, answer: [pron, word] };
-      });
-      const total = wrongChars.length + wrongWords.length;
-      if (total < 8) {
-        alert('단어와 글자 수의 합이 8개 이상이 되어야 합니다.');
-        return;
-      }
-      // 오답 요소만 저장 (플래그 포함)
-      localStorage.setItem('hiraganaGameMode', 'wrongOnly');
-      localStorage.setItem('hiraganaGameWrongChars', JSON.stringify(wrongChars));
-      localStorage.setItem('hiraganaGameWrongWords', JSON.stringify(wrongWords));
-      // 게임 페이지로 이동 (단어 게임으로 이동)
-      location.href = 'hiragana_word.html';
-    }
-    document.getElementById('delete-all').onclick = deleteAll;
-    document.getElementById('play-wrong-items').onclick = playWrongItems;
-    renderLibrary();
-  </script>
+  <script type="module" src="js/hiragana_library.js"></script>
 </body>
-</html> 
+</html>

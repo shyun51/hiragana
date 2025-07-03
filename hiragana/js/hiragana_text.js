@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         gameState.currentCharacter = gameState.pendingCharacters.pop();
         elements.hiraganaDisp.textContent = gameState.currentCharacter.char;
+        elements.answerInput.focus();
     }
 
     function checkAnswer() {

@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         gameState.currentCharacter = gameState.pendingCharacters.pop();
         elements.katakanaDisp.textContent = gameState.currentCharacter.char;
+        elements.answerInput.focus();
     }
 
     function checkAnswer() {

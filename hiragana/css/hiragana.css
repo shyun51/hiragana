@@ -1,4 +1,4 @@
-@import url('../common/css/common.css');
+@import url('../../common/css/common.css');
 
 body {
   display: flex;

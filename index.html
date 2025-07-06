@@ -21,13 +21,23 @@
   <link rel="stylesheet" href="common/css/common.css">
   <style>
     body { 
+      margin: 0; 
+      background: #f8f8ff;
+      text-align: center;
+    }
+    .survey-notice {
+      padding: 1em 0;
+      background-color: #e0e0ff;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #333;
+    }
+    main {
       display: flex; 
       flex-direction: column; 
       align-items: center; 
       justify-content: center; 
-      height: 100vh; 
-      margin: 0; 
-      background: #f8f8ff; 
+      min-height: 80vh;
     }
     h1 { 
       margin-bottom: 40px; 
@@ -62,11 +72,13 @@
   </style>
 </head>
 <body>
-  <h6>(insta)sl_hye0n에서 설문조사 한 번 씩 부탁드려요!</h6>
-  <h1>히라가나 / 가타카나 학습</h1>
-  <div class="select-btns">
-    <a href="hiragana/hiragana.html">히라가나</a>
-    <a href="katakana/katakana.html">가타카나</a>
-  </div>
+  <div class="survey-notice">(insta)sl_hye0n에서 설문조사 한 번 씩 부탁드려요!</div>
+  <main>
+    <h1>히라가나 / 가타카나 학습</h1>
+    <div class="select-btns">
+      <a href="hiragana/hiragana.html">히라가나</a>
+      <a href="katakana/katakana.html">가타카나</a>
+    </div>
+  </main>
 </body>
 </html>
